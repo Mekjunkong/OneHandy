@@ -1,0 +1,165 @@
+<h2>Homepage Hero — Layout Style</h2>
+<p class="subtitle">The hero is the first thing an expat sees. Which entry point feels right for a premium home services platform?</p>
+
+<div class="cards">
+
+  <!-- Option A: Editorial Statement -->
+  <div class="card" data-choice="editorial" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#FAFAF9;padding:0;min-height:220px;overflow:hidden;border-bottom:1px solid #E5E7EB">
+
+      <!-- Nav -->
+      <div style="padding:12px 18px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #E5E7EB">
+        <span style="color:#1C1C1C;font-weight:700;font-size:11px;letter-spacing:2px">ONEHANDY</span>
+        <div style="display:flex;gap:10px;align-items:center">
+          <span style="font-size:9px;color:#555">Services</span>
+          <span style="font-size:9px;color:#555">Pricing</span>
+          <span style="font-size:9px;color:#555">About</span>
+          <span style="background:#1C1C1C;color:#FAFAF9;padding:3px 9px;font-size:9px;border-radius:2px">Book Now</span>
+        </div>
+      </div>
+
+      <!-- Hero: full-width editorial -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;min-height:160px">
+        <!-- Left: headline -->
+        <div style="padding:20px 18px;display:flex;flex-direction:column;justify-content:center">
+          <div style="font-size:22px;font-weight:300;color:#1C1C1C;line-height:1.15;font-style:italic;letter-spacing:-0.5px;margin-bottom:8px">Your home,<br/>handled.</div>
+          <div style="width:28px;height:1.5px;background:#D4A853;margin-bottom:8px"></div>
+          <div style="font-size:9px;color:#555;line-height:1.5;margin-bottom:14px">Vetted local technicians.<br/>English support. Secure payment.</div>
+          <div style="display:flex;gap:8px">
+            <div style="background:#1C1C1C;color:#FAFAF9;padding:6px 14px;font-size:9px;border-radius:2px;font-weight:600">Book a Service</div>
+            <div style="border:1px solid #ddd;color:#555;padding:6px 12px;font-size:9px;border-radius:2px">See Services</div>
+          </div>
+        </div>
+        <!-- Right: image placeholder -->
+        <div style="background:linear-gradient(135deg,#E5E7EB 0%,#D1D5DB 100%);display:flex;align-items:center;justify-content:center;position:relative">
+          <div style="text-align:center">
+            <div style="font-size:28px;margin-bottom:4px">🏠</div>
+            <div style="font-size:8px;color:#6B7280">Premium home photo</div>
+          </div>
+          <!-- trust badge overlay -->
+          <div style="position:absolute;bottom:10px;left:10px;background:#fff;border-radius:4px;padding:5px 8px;box-shadow:0 2px 8px rgba(0,0,0,0.1)">
+            <div style="font-size:7px;font-weight:700;color:#1C1C1C">✓ 200+ Verified Jobs</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Editorial Split Hero</h3>
+      <p>Large italic headline left, lifestyle image right. Two CTAs: "Book a Service" (primary) + "See Services" (secondary). Feels like a premium concierge brand. Trust badge overlaid on image.</p>
+      <p style="margin-top:6px;font-size:11px;opacity:0.6">Best for: strong brand statement, premium positioning, desktop-first impression</p>
+    </div>
+  </div>
+
+  <!-- Option B: Service Category Grid -->
+  <div class="card" data-choice="category-grid" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#FAFAF9;padding:0;min-height:220px;overflow:hidden;border-bottom:1px solid #E5E7EB">
+
+      <!-- Nav -->
+      <div style="padding:12px 18px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #E5E7EB">
+        <span style="color:#1C1C1C;font-weight:700;font-size:11px;letter-spacing:2px">ONEHANDY</span>
+        <span style="background:#1C1C1C;color:#FAFAF9;padding:3px 9px;font-size:9px;border-radius:2px">Book Now</span>
+      </div>
+
+      <!-- Compact headline -->
+      <div style="padding:14px 18px 10px">
+        <div style="font-size:16px;font-weight:300;color:#1C1C1C;font-style:italic;letter-spacing:-0.3px">What do you need?</div>
+        <div style="font-size:8px;color:#888;margin-top:2px">Vetted technicians · English support · Secure payment</div>
+      </div>
+
+      <!-- Category grid -->
+      <div style="padding:0 18px 14px;display:grid;grid-template-columns:repeat(4,1fr);gap:6px">
+        <div style="background:#fff;border:1px solid #E5E7EB;border-radius:6px;padding:8px 4px;text-align:center">
+          <div style="font-size:16px;margin-bottom:3px">❄️</div>
+          <div style="font-size:7.5px;color:#333;font-weight:500">AC Clean</div>
+        </div>
+        <div style="background:#fff;border:1px solid #E5E7EB;border-radius:6px;padding:8px 4px;text-align:center">
+          <div style="font-size:16px;margin-bottom:3px">🔧</div>
+          <div style="font-size:7.5px;color:#333;font-weight:500">Plumbing</div>
+        </div>
+        <div style="background:#fff;border:1px solid #E5E7EB;border-radius:6px;padding:8px 4px;text-align:center">
+          <div style="font-size:16px;margin-bottom:3px">⚡</div>
+          <div style="font-size:7.5px;color:#333;font-weight:500">Electrical</div>
+        </div>
+        <div style="background:#fff;border:1px solid #E5E7EB;border-radius:6px;padding:8px 4px;text-align:center">
+          <div style="font-size:16px;margin-bottom:3px">🌿</div>
+          <div style="font-size:7.5px;color:#333;font-weight:500">Gardening</div>
+        </div>
+        <div style="background:#fff;border:1px solid #E5E7EB;border-radius:6px;padding:8px 4px;text-align:center">
+          <div style="font-size:16px;margin-bottom:3px">🏠</div>
+          <div style="font-size:7.5px;color:#333;font-weight:500">Roof Repair</div>
+        </div>
+        <div style="background:#fff;border:1px solid #E5E7EB;border-radius:6px;padding:8px 4px;text-align:center">
+          <div style="font-size:16px;margin-bottom:3px">🚨</div>
+          <div style="font-size:7.5px;color:#333;font-weight:500">Emergency</div>
+        </div>
+        <div style="background:#fff;border:1px solid #E5E7EB;border-radius:6px;padding:8px 4px;text-align:center">
+          <div style="font-size:16px;margin-bottom:3px">📋</div>
+          <div style="font-size:7.5px;color:#333;font-weight:500">Property Care</div>
+        </div>
+        <div style="background:#D4A853;border-radius:6px;padding:8px 4px;text-align:center">
+          <div style="font-size:16px;margin-bottom:3px;opacity:0">+</div>
+          <div style="font-size:7.5px;color:#fff;font-weight:600">All Services →</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Service Category Grid</h3>
+      <p>Compact headline then immediate service selection. User picks a category and starts booking right away. Very low friction — one tap to begin. Works exceptionally well on mobile.</p>
+      <p style="margin-top:6px;font-size:11px;opacity:0.6">Best for: mobile-first, repeat users, quick task completion, high conversion</p>
+    </div>
+  </div>
+
+  <!-- Option C: Hybrid -->
+  <div class="card" data-choice="hybrid" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#FAFAF9;padding:0;min-height:220px;overflow:hidden;border-bottom:1px solid #E5E7EB">
+
+      <!-- Nav -->
+      <div style="padding:12px 18px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #E5E7EB">
+        <span style="color:#1C1C1C;font-weight:700;font-size:11px;letter-spacing:2px">ONEHANDY</span>
+        <div style="display:flex;gap:10px;align-items:center">
+          <span style="font-size:9px;color:#555">Services</span>
+          <span style="font-size:9px;color:#555">Pricing</span>
+          <span style="background:#1C1C1C;color:#FAFAF9;padding:3px 9px;font-size:9px;border-radius:2px">Book Now</span>
+        </div>
+      </div>
+
+      <!-- Hero: full-width statement + inline form -->
+      <div style="padding:16px 18px 10px;text-align:center">
+        <div style="font-size:20px;font-weight:300;color:#1C1C1C;line-height:1.15;font-style:italic;letter-spacing:-0.5px;margin-bottom:4px">Home care, handled<br/>in English.</div>
+        <div style="font-size:8px;color:#888;margin-bottom:12px">Vetted · Reliable · Transparent pricing</div>
+
+        <!-- Inline booking starter -->
+        <div style="background:#fff;border:1px solid #D4A853;border-radius:4px;display:flex;gap:0;overflow:hidden;max-width:280px;margin:0 auto">
+          <select style="border:none;outline:none;padding:8px 10px;font-size:9px;color:#555;flex:1;background:#fff;appearance:none">
+            <option>Select a service…</option>
+          </select>
+          <div style="background:#1C1C1C;color:#FAFAF9;padding:8px 12px;font-size:9px;font-weight:600;white-space:nowrap">Book →</div>
+        </div>
+
+        <!-- Trust row -->
+        <div style="display:flex;justify-content:center;gap:12px;margin-top:10px">
+          <span style="font-size:8px;color:#888">✓ Verified technicians</span>
+          <span style="font-size:8px;color:#888">✓ Photo updates</span>
+          <span style="font-size:8px;color:#888">✓ Secure payment</span>
+        </div>
+      </div>
+
+      <!-- Category strip -->
+      <div style="padding:0 18px 12px;display:flex;gap:5px;overflow:hidden">
+        <div style="border:1px solid #E5E7EB;border-radius:20px;padding:4px 9px;font-size:7.5px;color:#444;white-space:nowrap;background:#fff">AC Cleaning</div>
+        <div style="border:1px solid #E5E7EB;border-radius:20px;padding:4px 9px;font-size:7.5px;color:#444;white-space:nowrap;background:#fff">Plumbing</div>
+        <div style="border:1px solid #E5E7EB;border-radius:20px;padding:4px 9px;font-size:7.5px;color:#444;white-space:nowrap;background:#fff">Electrical</div>
+        <div style="border:1px solid #E5E7EB;border-radius:20px;padding:4px 9px;font-size:7.5px;color:#444;white-space:nowrap;background:#fff">Emergency</div>
+        <div style="border:1px solid #D4A853;border-radius:20px;padding:4px 9px;font-size:7.5px;color:#D4A853;white-space:nowrap;background:#fff">+ More</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Hybrid: Statement + Quick-Select</h3>
+      <p>Editorial headline centered, then an inline dropdown-to-book widget, then a pill-strip of service categories. Brand statement first, conversion second. Best of both worlds — premium feel with low friction.</p>
+      <p style="margin-top:6px;font-size:11px;opacity:0.6">Best for: new visitors who need brand context before committing, balanced conversion</p>
+    </div>
+  </div>
+
+</div>
+
+<p style="margin-top:16px;font-size:12px;opacity:0.5;text-align:center">My recommendation: <strong>C</strong> — pairs the premium minimal brand with a direct booking entry point.</p>

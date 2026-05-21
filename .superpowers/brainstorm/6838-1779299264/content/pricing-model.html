@@ -1,0 +1,127 @@
+<h2>Pricing Display Model</h2>
+<p class="subtitle">How pricing is shown directly affects the booking flow — whether users see a checkout total or submit a request. Which approach fits OneHandy best?</p>
+
+<div class="cards">
+
+  <!-- Option A: Fixed Transparent Pricing -->
+  <div class="card" data-choice="fixed" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#FAFAF9;padding:16px;min-height:200px;border-bottom:1px solid #E5E7EB">
+      <div style="font-size:9px;color:#888;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px">Service Cards</div>
+
+      <!-- Service cards row -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
+        <div style="background:#fff;border:1px solid #E5E7EB;border-radius:6px;padding:10px">
+          <div style="font-size:8px;color:#888;margin-bottom:3px">AC Cleaning</div>
+          <div style="font-size:16px;font-weight:700;color:#1C1C1C;margin-bottom:2px">฿800</div>
+          <div style="font-size:7.5px;color:#D4A853">Fixed · 1-2 hrs</div>
+          <div style="margin-top:6px;background:#1C1C1C;color:#fff;border-radius:3px;padding:4px;text-align:center;font-size:7.5px">Book Now</div>
+        </div>
+        <div style="background:#fff;border:1px solid #E5E7EB;border-radius:6px;padding:10px">
+          <div style="font-size:8px;color:#888;margin-bottom:3px">Plumbing</div>
+          <div style="font-size:16px;font-weight:700;color:#1C1C1C;margin-bottom:2px">฿1,200</div>
+          <div style="font-size:7.5px;color:#D4A853">From · Varies</div>
+          <div style="margin-top:6px;background:#1C1C1C;color:#fff;border-radius:3px;padding:4px;text-align:center;font-size:7.5px">Book Now</div>
+        </div>
+      </div>
+
+      <!-- Checkout preview -->
+      <div style="background:#fff;border:1px solid #D4A853;border-radius:6px;padding:10px">
+        <div style="font-size:8px;color:#888;margin-bottom:6px">Booking Summary</div>
+        <div style="display:flex;justify-content:space-between;font-size:8px;margin-bottom:3px">
+          <span style="color:#555">AC Cleaning × 1</span><span style="color:#1C1C1C;font-weight:600">฿800</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:8px;margin-bottom:6px">
+          <span style="color:#555">Platform fee</span><span style="color:#1C1C1C">฿80</span>
+        </div>
+        <div style="border-top:1px solid #eee;padding-top:5px;display:flex;justify-content:space-between;font-size:9px;font-weight:700">
+          <span>Total</span><span>฿880</span>
+        </div>
+        <div style="margin-top:6px;background:#D4A853;color:#fff;border-radius:3px;padding:5px;text-align:center;font-size:8px;font-weight:600">Pay & Confirm →</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Fixed Transparent Prices</h3>
+      <p>Every service has a listed price upfront. Users see a checkout total and pay instantly via Stripe. Maximum trust — expats know exactly what they're paying before committing. Ideal for standard services (AC, plumbing, gardening).</p>
+      <p style="margin-top:6px;font-size:11px;opacity:0.6">Booking flow: Select → Date/Time → Details → Pay → Confirmed</p>
+    </div>
+  </div>
+
+  <!-- Option B: Quote-Based -->
+  <div class="card" data-choice="quote" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#FAFAF9;padding:16px;min-height:200px;border-bottom:1px solid #E5E7EB">
+      <div style="font-size:9px;color:#888;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px">Service Cards</div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
+        <div style="background:#fff;border:1px solid #E5E7EB;border-radius:6px;padding:10px">
+          <div style="font-size:8px;color:#888;margin-bottom:3px">AC Cleaning</div>
+          <div style="font-size:11px;color:#555;margin-bottom:2px;font-style:italic">Custom quote</div>
+          <div style="font-size:7.5px;color:#888">Based on unit type</div>
+          <div style="margin-top:6px;background:#1C1C1C;color:#fff;border-radius:3px;padding:4px;text-align:center;font-size:7.5px">Request Quote</div>
+        </div>
+        <div style="background:#fff;border:1px solid #E5E7EB;border-radius:6px;padding:10px">
+          <div style="font-size:8px;color:#888;margin-bottom:3px">Plumbing</div>
+          <div style="font-size:11px;color:#555;margin-bottom:2px;font-style:italic">Custom quote</div>
+          <div style="font-size:7.5px;color:#888">Scope-dependent</div>
+          <div style="margin-top:6px;background:#1C1C1C;color:#fff;border-radius:3px;padding:4px;text-align:center;font-size:7.5px">Request Quote</div>
+        </div>
+      </div>
+
+      <!-- Quote form preview -->
+      <div style="background:#fff;border:1px solid #E5E7EB;border-radius:6px;padding:10px">
+        <div style="font-size:8px;color:#888;margin-bottom:6px">Describe your issue</div>
+        <div style="border:1px solid #ddd;border-radius:4px;padding:6px;font-size:8px;color:#aaa;margin-bottom:6px">e.g. "Leaking pipe under kitchen sink…"</div>
+        <div style="font-size:8px;color:#888;margin-bottom:4px">Preferred date</div>
+        <div style="border:1px solid #ddd;border-radius:4px;padding:5px;font-size:8px;color:#aaa;margin-bottom:8px">Select a date</div>
+        <div style="background:#1C1C1C;color:#fff;border-radius:3px;padding:5px;text-align:center;font-size:8px">Submit Request →</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Quote-Based</h3>
+      <p>No upfront prices. Users describe their needs and OneHandy responds with a quote. More flexible for complex jobs — but adds friction and a waiting step. Risks losing expats who want instant confirmation.</p>
+      <p style="margin-top:6px;font-size:11px;opacity:0.6">Booking flow: Select → Describe Issue → Submit → OneHandy contacts you</p>
+    </div>
+  </div>
+
+  <!-- Option C: Hybrid -->
+  <div class="card" data-choice="hybrid-pricing" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#FAFAF9;padding:16px;min-height:200px;border-bottom:1px solid #E5E7EB">
+      <div style="font-size:9px;color:#888;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px">Service Cards</div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
+        <!-- Fixed price card -->
+        <div style="background:#fff;border:1px solid #E5E7EB;border-radius:6px;padding:10px;position:relative">
+          <div style="position:absolute;top:6px;right:6px;background:#D4A853;color:#fff;font-size:6.5px;padding:2px 5px;border-radius:10px;font-weight:600">FIXED</div>
+          <div style="font-size:8px;color:#888;margin-bottom:3px">AC Cleaning</div>
+          <div style="font-size:16px;font-weight:700;color:#1C1C1C;margin-bottom:2px">฿800</div>
+          <div style="font-size:7.5px;color:#888">1-2 hrs · Standard unit</div>
+          <div style="margin-top:6px;background:#1C1C1C;color:#fff;border-radius:3px;padding:4px;text-align:center;font-size:7.5px">Book Now</div>
+        </div>
+        <!-- Quote card -->
+        <div style="background:#fff;border:1px solid #E5E7EB;border-radius:6px;padding:10px;position:relative">
+          <div style="position:absolute;top:6px;right:6px;background:#6B7280;color:#fff;font-size:6.5px;padding:2px 5px;border-radius:10px;font-weight:600">QUOTE</div>
+          <div style="font-size:8px;color:#888;margin-bottom:3px">Roof Repair</div>
+          <div style="font-size:11px;color:#555;font-style:italic;margin-bottom:2px">From ฿3,000</div>
+          <div style="font-size:7.5px;color:#888">Scope-dependent</div>
+          <div style="margin-top:6px;border:1px solid #1C1C1C;color:#1C1C1C;border-radius:3px;padding:4px;text-align:center;font-size:7.5px">Get Quote</div>
+        </div>
+      </div>
+
+      <!-- Emergency CTA -->
+      <div style="background:#1C1C1C;border-radius:6px;padding:8px 10px;display:flex;justify-content:space-between;align-items:center">
+        <div>
+          <div style="font-size:8px;color:#fff;font-weight:600">🚨 Emergency Callout</div>
+          <div style="font-size:7.5px;color:#aaa">Within 2 hours · Priority dispatch</div>
+        </div>
+        <div style="background:#D4A853;color:#fff;padding:4px 8px;border-radius:3px;font-size:7.5px;font-weight:600">฿500 + parts</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Hybrid: Fixed + Quote by Service Type</h3>
+      <p>Standard services (AC, plumbing, gardening) show fixed prices and book instantly. Complex/variable jobs (roof repair, electrical assessment) show "from" price and get a quote. Emergency callout has its own fixed rate. Best of both worlds.</p>
+      <p style="margin-top:6px;font-size:11px;opacity:0.6">Clear badge labels (FIXED / QUOTE) so users always know what to expect</p>
+    </div>
+  </div>
+
+</div>
+
+<p style="margin-top:16px;font-size:12px;opacity:0.5;text-align:center">My recommendation: <strong>C</strong> — transparent pricing where possible, quotes only for genuinely variable jobs.</p>

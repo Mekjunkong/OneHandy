@@ -1,0 +1,134 @@
+<h2>Booking Flow — Number of Steps</h2>
+<p class="subtitle">Every extra step reduces completion. How much information does OneHandy need upfront to dispatch a technician correctly?</p>
+
+<div class="options">
+
+  <!-- Option A: Lean 3-step -->
+  <div class="option" data-choice="lean" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Lean — 3 Steps</h3>
+
+      <!-- Flow diagram -->
+      <div style="display:flex;align-items:center;gap:6px;margin:10px 0;flex-wrap:wrap">
+        <div style="background:#1C1C1C;color:#fff;padding:6px 10px;border-radius:4px;font-size:9px;font-weight:600;text-align:center;min-width:70px">
+          <div style="font-size:7px;opacity:0.6;margin-bottom:2px">Step 1</div>
+          Service + Date
+        </div>
+        <div style="color:#D4A853;font-size:14px">→</div>
+        <div style="background:#1C1C1C;color:#fff;padding:6px 10px;border-radius:4px;font-size:9px;font-weight:600;text-align:center;min-width:70px">
+          <div style="font-size:7px;opacity:0.6;margin-bottom:2px">Step 2</div>
+          Your Details
+        </div>
+        <div style="color:#D4A853;font-size:14px">→</div>
+        <div style="background:#D4A853;color:#fff;padding:6px 10px;border-radius:4px;font-size:9px;font-weight:600;text-align:center;min-width:70px">
+          <div style="font-size:7px;opacity:0.6;margin-bottom:2px">Step 3</div>
+          Pay & Confirm
+        </div>
+        <div style="color:#D4A853;font-size:14px">→</div>
+        <div style="border:1px solid #D4A853;color:#D4A853;padding:6px 10px;border-radius:4px;font-size:9px;text-align:center;min-width:70px">
+          <div style="font-size:7px;opacity:0.6;margin-bottom:2px">Done</div>
+          Confirmed ✓
+        </div>
+      </div>
+
+      <p style="font-size:11px;color:#555;margin-bottom:6px">Step 1 captures: service type, preferred date, time window. Step 2: name, phone, address. Step 3: Stripe payment.</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <span style="background:#F0FDF4;color:#166534;font-size:10px;padding:3px 7px;border-radius:3px">✓ Highest conversion</span>
+        <span style="background:#FEF9C3;color:#854D0E;font-size:10px;padding:3px 7px;border-radius:3px">⚠ Ops may need follow-up call</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Option B: Standard 4-step -->
+  <div class="option" data-choice="standard" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Standard — 4 Steps</h3>
+
+      <div style="display:flex;align-items:center;gap:5px;margin:10px 0;flex-wrap:wrap">
+        <div style="background:#1C1C1C;color:#fff;padding:6px 10px;border-radius:4px;font-size:9px;font-weight:600;text-align:center;min-width:64px">
+          <div style="font-size:7px;opacity:0.6;margin-bottom:2px">Step 1</div>
+          Service
+        </div>
+        <div style="color:#D4A853;font-size:14px">→</div>
+        <div style="background:#1C1C1C;color:#fff;padding:6px 10px;border-radius:4px;font-size:9px;font-weight:600;text-align:center;min-width:64px">
+          <div style="font-size:7px;opacity:0.6;margin-bottom:2px">Step 2</div>
+          Property
+        </div>
+        <div style="color:#D4A853;font-size:14px">→</div>
+        <div style="background:#1C1C1C;color:#fff;padding:6px 10px;border-radius:4px;font-size:9px;font-weight:600;text-align:center;min-width:64px">
+          <div style="font-size:7px;opacity:0.6;margin-bottom:2px">Step 3</div>
+          Date + You
+        </div>
+        <div style="color:#D4A853;font-size:14px">→</div>
+        <div style="background:#D4A853;color:#fff;padding:6px 10px;border-radius:4px;font-size:9px;font-weight:600;text-align:center;min-width:64px">
+          <div style="font-size:7px;opacity:0.6;margin-bottom:2px">Step 4</div>
+          Pay & Confirm
+        </div>
+        <div style="color:#D4A853;font-size:14px">→</div>
+        <div style="border:1px solid #D4A853;color:#D4A853;padding:6px 10px;border-radius:4px;font-size:9px;text-align:center;min-width:64px">
+          <div style="font-size:7px;opacity:0.6;margin-bottom:2px">Done</div>
+          Confirmed ✓
+        </div>
+      </div>
+
+      <p style="font-size:11px;color:#555;margin-bottom:6px">Adds a dedicated <strong>Property step</strong>: type (condo/villa/house), number of floors, parking access, gate code notes. Helps dispatch the right tech with the right gear.</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <span style="background:#F0FDF4;color:#166534;font-size:10px;padding:3px 7px;border-radius:3px">✓ Right tech dispatched first time</span>
+        <span style="background:#F0FDF4;color:#166534;font-size:10px;padding:3px 7px;border-radius:3px">✓ Fewer rebooks</span>
+        <span style="background:#FEF9C3;color:#854D0E;font-size:10px;padding:3px 7px;border-radius:3px">⚠ Slightly longer</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Option C: Full 5-step -->
+  <div class="option" data-choice="full" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>Full — 5 Steps</h3>
+
+      <div style="display:flex;align-items:center;gap:4px;margin:10px 0;flex-wrap:wrap">
+        <div style="background:#1C1C1C;color:#fff;padding:5px 8px;border-radius:4px;font-size:8.5px;font-weight:600;text-align:center;min-width:58px">
+          <div style="font-size:7px;opacity:0.6;margin-bottom:1px">Step 1</div>
+          Service
+        </div>
+        <div style="color:#D4A853;font-size:12px">→</div>
+        <div style="background:#1C1C1C;color:#fff;padding:5px 8px;border-radius:4px;font-size:8.5px;font-weight:600;text-align:center;min-width:58px">
+          <div style="font-size:7px;opacity:0.6;margin-bottom:1px">Step 2</div>
+          Property
+        </div>
+        <div style="color:#D4A853;font-size:12px">→</div>
+        <div style="background:#1C1C1C;color:#fff;padding:5px 8px;border-radius:4px;font-size:8.5px;font-weight:600;text-align:center;min-width:58px">
+          <div style="font-size:7px;opacity:0.6;margin-bottom:1px">Step 3</div>
+          Issue Notes
+        </div>
+        <div style="color:#D4A853;font-size:12px">→</div>
+        <div style="background:#1C1C1C;color:#fff;padding:5px 8px;border-radius:4px;font-size:8.5px;font-weight:600;text-align:center;min-width:58px">
+          <div style="font-size:7px;opacity:0.6;margin-bottom:1px">Step 4</div>
+          Date + You
+        </div>
+        <div style="color:#D4A853;font-size:12px">→</div>
+        <div style="background:#D4A853;color:#fff;padding:5px 8px;border-radius:4px;font-size:8.5px;font-weight:600;text-align:center;min-width:58px">
+          <div style="font-size:7px;opacity:0.6;margin-bottom:1px">Step 5</div>
+          Pay & Confirm
+        </div>
+        <div style="color:#D4A853;font-size:12px">→</div>
+        <div style="border:1px solid #D4A853;color:#D4A853;padding:5px 8px;border-radius:4px;font-size:8.5px;text-align:center;min-width:58px">
+          Confirmed ✓
+        </div>
+      </div>
+
+      <p style="font-size:11px;color:#555;margin-bottom:6px">Adds an <strong>Issue Notes step</strong>: optional photo upload, description textarea, urgency level. Maximises dispatch accuracy — tech arrives fully prepared.</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <span style="background:#F0FDF4;color:#166534;font-size:10px;padding:3px 7px;border-radius:3px">✓ Best dispatch accuracy</span>
+        <span style="background:#FEE2E2;color:#991B1B;font-size:10px;padding:3px 7px;border-radius:3px">✗ Highest drop-off risk</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div style="margin-top:16px;padding:12px;background:rgba(212,168,83,0.08);border:1px solid rgba(212,168,83,0.2);border-radius:6px">
+  <p style="font-size:11px;color:#555;margin:0"><strong>My recommendation: B (4 steps).</strong> The Property step dramatically reduces failed dispatches — critical when technicians drive across Chiang Mai. Issue Notes can be optional inside Step 2, keeping it lean without losing key info.</p>
+</div>
