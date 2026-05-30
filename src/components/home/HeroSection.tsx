@@ -1,8 +1,10 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { ChevronDown } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { AlertTriangle, ChevronDown } from 'lucide-react';
 import { services } from '@/lib/services';
 
 const categories = [
@@ -12,6 +14,11 @@ const categories = [
   { label: 'Gardening', slug: 'gardening' },
   { label: 'Emergency', slug: 'emergency' },
 ];
+
+const fadeInUp = {
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+};
 
 export function HeroSection() {
   const [selected, setSelected] = useState('');
@@ -51,22 +58,38 @@ export function HeroSection() {
         </div>
 
         {/* Headline */}
-        <h1 className="font-display text-[clamp(3rem,8vw,5.5rem)] font-light italic text-ink leading-[1.05] mb-6">
+        <motion.h1
+          {...fadeInUp}
+          transition={{ duration: 0.55, ease: 'easeOut', delay: 0 }}
+          className="font-display text-[clamp(3rem,8vw,5.5rem)] font-light italic text-ink leading-[1.05] mb-6"
+        >
           Your home,<br />handled.
-        </h1>
+        </motion.h1>
 
         {/* Gold divider */}
-        <div className="flex items-center justify-center mb-6">
+        <motion.div
+          {...fadeInUp}
+          transition={{ duration: 0.55, ease: 'easeOut', delay: 0.15 }}
+          className="flex items-center justify-center mb-6"
+        >
           <div className="w-8 h-px bg-gold" />
-        </div>
+        </motion.div>
 
         {/* Subtitle */}
-        <p className="text-muted text-lg font-normal tracking-wide mb-12">
-          Vetted technicians · English support · Secure payment
-        </p>
+        <motion.p
+          {...fadeInUp}
+          transition={{ duration: 0.55, ease: 'easeOut', delay: 0.3 }}
+          className="text-muted text-lg font-normal tracking-wide mb-12"
+        >
+          English-speaking coordination · Clear request updates · Chiang Mai pilot service
+        </motion.p>
 
         {/* Inline booking widget */}
-        <div className="flex flex-col sm:flex-row gap-0 max-w-lg mx-auto mb-10 shadow-sm">
+        <motion.div
+          {...fadeInUp}
+          transition={{ duration: 0.55, ease: 'easeOut', delay: 0.45 }}
+          className="flex flex-col sm:flex-row gap-0 max-w-lg mx-auto mb-10 shadow-sm"
+        >
           <div className="relative flex-1">
             <select
               value={selected}
@@ -89,9 +112,34 @@ export function HeroSection() {
             onClick={handleBook}
             className="h-14 px-8 bg-ink text-cream text-sm font-semibold tracking-wide hover:bg-charcoal transition-colors duration-150 whitespace-nowrap"
           >
-            Book →
+            Request Service →
           </button>
-        </div>
+        </motion.div>
+
+        {/* Urgent path */}
+        <motion.div
+          {...fadeInUp}
+          transition={{ duration: 0.55, ease: 'easeOut', delay: 0.55 }}
+          className="max-w-2xl mx-auto mb-10 rounded-lg border border-gold/30 bg-surface/80 px-5 py-4 text-left shadow-sm"
+        >
+          <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-sm bg-gold/10">
+              <AlertTriangle size={18} className="text-gold" />
+            </div>
+            <div className="flex-1">
+              <p className="text-sm font-semibold text-ink">Urgent leak, power issue, or safety concern?</p>
+              <p className="text-xs leading-relaxed text-muted">
+                Submit an urgent service request for triage and availability follow-up. If there is immediate danger, contact local emergency services or your building manager first.
+              </p>
+            </div>
+            <Link
+              href="/book?step=1&service=emergency"
+              className="inline-flex items-center justify-center whitespace-nowrap rounded-sm bg-ink px-4 py-2 text-xs font-semibold tracking-wide text-cream transition-colors hover:bg-charcoal"
+            >
+              Request urgent help
+            </Link>
+          </div>
+        </motion.div>
 
         {/* Category pill strip */}
         <div className="flex flex-wrap items-center justify-center gap-2 mb-16">
@@ -115,9 +163,9 @@ export function HeroSection() {
         {/* Trust strip */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 pt-8 border-t border-border-line">
           {[
-            '200+ Jobs Completed',
-            'Verified Technicians',
-            'English-Speaking Support',
+            'Nimman, Santitham & Old City',
+            'Hang Dong and nearby areas',
+            'English-speaking coordination',
           ].map((item) => (
             <div key={item} className="flex items-center gap-2 text-sm text-muted">
               <span className="text-gold font-semibold">✓</span>

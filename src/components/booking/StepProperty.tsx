@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { Building2, TreePine, Home, Store } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
+import { isPropertyStepValid, type BookingData } from './BookingWizard';
 
 const propertyTypes = [
   { value: 'condo', label: 'Condo', icon: Building2 },
@@ -12,28 +13,31 @@ const propertyTypes = [
 ];
 
 interface StepPropertyProps {
-  service: string;
-  onNext: (data?: Record<string, string>) => void;
+  draft: BookingData;
+  onNext: (data?: Partial<BookingData>) => void;
   onBack: () => void;
 }
 
-export function StepProperty({ service, onNext, onBack }: StepPropertyProps) {
-  const [propertyType, setPropertyType] = useState('');
-  const [address, setAddress] = useState('');
-  const [unit, setUnit] = useState('');
-  const [access, setAccess] = useState('');
-  const [acUnits, setAcUnits] = useState('1');
+export function StepProperty({ draft, onNext, onBack }: StepPropertyProps) {
+  const [propertyType, setPropertyType] = useState(draft.propertyType);
+  const [address, setAddress] = useState(draft.address);
+  const [unit, setUnit] = useState(draft.unit);
+  const [accessNotes, setAccessNotes] = useState(draft.accessNotes);
+  const [acUnits, setAcUnits] = useState(String(draft.acUnits || 1));
 
-  const isValid = propertyType && address.trim().length > 5;
+  const nextData = {
+    propertyType,
+    address: address.trim(),
+    unit: unit.trim(),
+    accessNotes: accessNotes.trim(),
+    acUnits: Math.min(Math.max(Number(acUnits) || 1, 1), 20),
+  };
+  const isValid = isPropertyStepValid({ ...draft, ...nextData });
 
   const handleNext = () => {
-    onNext({
-      propertyType,
-      address: encodeURIComponent(address),
-      unit: encodeURIComponent(unit),
-      access: encodeURIComponent(access),
-      acUnits,
-    });
+    if (!isValid) return;
+
+    onNext(nextData);
   };
 
   return (
@@ -93,7 +97,7 @@ export function StepProperty({ service, onNext, onBack }: StepPropertyProps) {
       </div>
 
       {/* AC units (only for AC cleaning) */}
-      {service === 'ac-cleaning' && (
+      {draft.service === 'ac-cleaning' && (
         <div className="mb-4">
           <label className="block text-xs font-semibold tracking-wide uppercase text-muted mb-2">
             Number of AC Units
@@ -115,8 +119,8 @@ export function StepProperty({ service, onNext, onBack }: StepPropertyProps) {
           Access Notes <span className="normal-case font-normal">(optional)</span>
         </label>
         <textarea
-          value={access}
-          onChange={(e) => setAccess(e.target.value)}
+          value={accessNotes}
+          onChange={(e) => setAccessNotes(e.target.value)}
           rows={3}
           placeholder="e.g. Gate code: 1234, parking in visitor bay, call on arrival…"
           className="w-full px-4 py-3 border border-border-line rounded-sm bg-surface text-sm text-ink placeholder:text-muted/50 focus:outline-none focus:border-gold transition-colors resize-none"

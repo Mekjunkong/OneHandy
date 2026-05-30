@@ -35,29 +35,50 @@ export function ServicesPreview() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {preview.map((service) => {
             const Icon = iconMap[service.icon] || Home;
+            const isEmergency = service.slug === 'emergency';
             return (
-              <Link
+              <article
                 key={service.slug}
-                href={`/book?step=1&service=${service.slug}`}
-                className="group bg-surface border border-border-line rounded-lg p-6 hover:border-gold hover:shadow-sm transition-all duration-150"
+                className={`group rounded-lg transition-all duration-150 ${
+                  isEmergency
+                    ? 'border border-gold/40 bg-gold/[0.04] hover:border-gold hover:shadow-sm'
+                    : 'bg-surface border border-border-line hover:border-gold hover:shadow-sm'
+                }`}
               >
-                <div className="flex items-start justify-between mb-4">
-                  <div className="w-10 h-10 rounded-sm bg-cream flex items-center justify-center">
-                    <Icon size={20} className="text-muted group-hover:text-gold transition-colors" />
+                <Link href={`/services/${service.slug}`} className="block p-6 pb-4">
+                  <div className="flex items-start justify-between mb-4">
+                    <div className={`w-10 h-10 rounded-sm flex items-center justify-center ${isEmergency ? 'bg-gold/10' : 'bg-cream'}`}>
+                      <Icon
+                        size={20}
+                        className={isEmergency ? 'text-gold' : 'text-muted group-hover:text-gold transition-colors'}
+                      />
+                    </div>
+                    <Badge type={service.type} />
                   </div>
-                  <Badge type={service.type} />
+                  <h3 className="font-sans text-base font-semibold text-ink mb-1.5">
+                    {service.name}
+                  </h3>
+                  <p className="text-sm text-muted mb-4 leading-relaxed">{service.shortDesc}</p>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-semibold text-ink">{service.price}</span>
+                    <span className="text-xs text-muted group-hover:text-gold transition-colors flex items-center gap-1">
+                      View details <ArrowRight size={12} />
+                    </span>
+                  </div>
+                </Link>
+                <div className="px-6 pb-6">
+                  <Link
+                    href={`/book?step=1&service=${service.slug}`}
+                    className={`inline-flex w-full items-center justify-center gap-1 rounded-sm px-4 py-2 text-xs font-semibold transition-colors ${
+                      isEmergency
+                        ? 'border border-gold text-gold hover:bg-gold hover:text-ink'
+                        : 'border border-border-line text-ink hover:border-gold hover:text-gold'
+                    }`}
+                  >
+                    {isEmergency ? 'Request urgent help' : 'Request this service'} <ArrowRight size={12} />
+                  </Link>
                 </div>
-                <h3 className="font-sans text-base font-semibold text-ink mb-1.5">
-                  {service.name}
-                </h3>
-                <p className="text-sm text-muted mb-4 leading-relaxed">{service.shortDesc}</p>
-                <div className="flex items-center justify-between">
-                  <span className="text-sm font-semibold text-ink">{service.price}</span>
-                  <span className="text-xs text-muted group-hover:text-gold transition-colors flex items-center gap-1">
-                    Book Now <ArrowRight size={12} />
-                  </span>
-                </div>
-              </Link>
+              </article>
             );
           })}
         </div>

@@ -7,7 +7,7 @@ export function TechniciansTable() {
       <table className="w-full text-sm">
         <thead className="bg-cream border-b border-border-line">
           <tr>
-            {['ID', 'Name', 'Services', 'Status', 'Jobs Completed', 'Rating'].map((h) => (
+            {['ID', 'Name', 'Services', 'Status', 'Completed Requests', 'Rating'].map((h) => (
               <th key={h} className="text-left px-4 py-3 text-xs font-semibold tracking-wide uppercase text-muted whitespace-nowrap">
                 {h}
               </th>

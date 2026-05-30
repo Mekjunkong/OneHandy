@@ -11,6 +11,7 @@ interface PinGateProps {
 export function PinGate({ onSuccess }: PinGateProps) {
   const [pin, setPin] = useState(['', '', '', '', '', '']);
   const [error, setError] = useState(false);
+  const [message, setMessage] = useState('');
   const [shake, setShake] = useState(false);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
@@ -24,8 +25,9 @@ export function PinGate({ onSuccess }: PinGateProps) {
     newPin[index] = value;
     setPin(newPin);
     setError(false);
+    setMessage('');
     if (value && index < 5) inputRefs.current[index + 1]?.focus();
-    if (newPin.every((d) => d !== '') && !value === false) {
+    if (newPin.every((d) => d !== '')) {
       verifyPin(newPin.join(''));
     }
   };
@@ -52,6 +54,7 @@ export function PinGate({ onSuccess }: PinGateProps) {
           onSuccess();
         } else {
           setError(true);
+          setMessage(data.message || 'Incorrect PIN. Please try again.');
           setShake(true);
           setPin(['', '', '', '', '', '']);
           setTimeout(() => setShake(false), 500);
@@ -61,6 +64,7 @@ export function PinGate({ onSuccess }: PinGateProps) {
       .catch(() => {
         // Fallback: direct env check not possible client-side; show error
         setError(true);
+        setMessage('Admin access is unavailable. Configure ADMIN_PIN for the Phase 1 local PIN gate.');
         setShake(true);
         setPin(['', '', '', '', '', '']);
         setTimeout(() => setShake(false), 500);
@@ -74,7 +78,10 @@ export function PinGate({ onSuccess }: PinGateProps) {
           <Lock size={20} className="text-muted" />
         </div>
         <h1 className="font-display text-2xl font-semibold text-ink mb-2">Admin Access</h1>
-        <p className="text-muted text-sm mb-8">Enter your 6-digit admin PIN to continue.</p>
+        <p className="text-muted text-sm mb-3">Enter your 6-digit admin PIN to continue.</p>
+        <p className="text-xs text-muted mb-8">
+          Phase 1 admin uses a local PIN gate for mock data only. It is not production-grade backend auth.
+        </p>
 
         <div
           className="flex gap-3 justify-center mb-6"
@@ -99,7 +106,7 @@ export function PinGate({ onSuccess }: PinGateProps) {
           ))}
         </div>
 
-        {error && <p className="text-error text-sm mb-4">Incorrect PIN. Please try again.</p>}
+        {error && <p className="text-error text-sm mb-4">{message || 'Incorrect PIN. Please try again.'}</p>}
 
         <Button
           variant="primary"

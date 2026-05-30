@@ -21,7 +21,7 @@ export function StepService({ initialService, onNext }: StepServiceProps) {
   return (
     <div>
       <h2 className="font-display text-2xl font-semibold text-ink mb-2">Choose your service</h2>
-      <p className="text-muted text-sm mb-8">Select the service you need and see live pricing.</p>
+      <p className="text-muted text-sm mb-8">Select the service you need and review guide pricing.</p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
         {services.map((service) => {

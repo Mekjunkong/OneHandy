@@ -50,7 +50,7 @@ export function SiteHeader() {
           <div className="hidden md:flex items-center gap-4">
             <Link href="/book">
               <Button variant="primary" size="sm">
-                Book a Service →
+                Request Service →
               </Button>
             </Link>
           </div>
@@ -102,7 +102,7 @@ export function SiteHeader() {
             <div className="p-6 border-t border-border-line">
               <Link href="/book" onClick={() => setMobileOpen(false)}>
                 <Button variant="primary" size="lg" className="w-full">
-                  Book a Service →
+                  Request Service →
                 </Button>
               </Link>
             </div>

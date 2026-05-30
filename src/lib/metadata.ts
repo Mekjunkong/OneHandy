@@ -5,13 +5,13 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://onehandy.com';
 
 export function serviceMetadata(service: Service): Metadata {
   return {
-    title: `${service.name} Chiang Mai | OneHandy — Vetted Technicians`,
-    description: `Book a vetted ${service.name.toLowerCase()} technician in Chiang Mai. English support, secure payment, photo updates. ${service.price} — ${service.duration}.`,
+    title: `${service.name} Chiang Mai | OneHandy — Service Requests`,
+    description: `Request ${service.name.toLowerCase()} support in Chiang Mai with English coordination and availability follow-up. Guide price ${service.price} — ${service.duration}.`,
     keywords: [
       `${service.name.toLowerCase()} Chiang Mai`,
       `${service.name.toLowerCase()} expat Thailand`,
       'home services Chiang Mai',
-      'vetted technicians Chiang Mai',
+      'home service requests Chiang Mai',
       'English home services Thailand',
     ],
     openGraph: {

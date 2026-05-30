@@ -3,33 +3,29 @@ import { ShieldCheck, Globe, CreditCard } from 'lucide-react';
 const trustItems = [
   {
     icon: ShieldCheck,
-    title: 'Verified Technicians',
-    desc: 'Every technician is background-checked, reference-verified, and assessed on-site before joining our network.',
+    title: 'Pilot Network in Progress',
+    desc: 'We are building a practical Chiang Mai technician network with careful onboarding and clear service expectations before every request is accepted.',
   },
   {
     icon: Globe,
-    title: 'English Support',
-    desc: 'Our coordination team communicates with you in English at every step — booking, updates, and follow-up.',
+    title: 'English Coordination',
+    desc: 'Requests, updates, and follow-up are handled in clear English so expat homeowners know what happens next.',
   },
   {
     icon: CreditCard,
-    title: 'Secure Payment',
-    desc: 'Pay online via card with full protection. No cash handling. Receipts and photo proof for every job.',
+    title: 'Pay After Confirmation',
+    desc: 'No online payment is taken during the Phase 1 request flow. Pricing and payment steps are confirmed after availability is reviewed.',
   },
 ];
 
-const testimonials = [
+const pilotProof = [
   {
-    quote:
-      "I was nervous about finding a reliable plumber as a foreigner. OneHandy sent someone within 24 hours, kept me updated in English, and the job was done perfectly.",
-    name: 'Sarah M.',
-    location: 'Nimman, Chiang Mai',
+    title: 'Launching in Chiang Mai',
+    desc: 'Focused first on core home services for expat homeowners and long-stay residents.',
   },
   {
-    quote:
-      'The AC cleaning was thorough and priced exactly as quoted. The WhatsApp photos before and after were a great touch. Will definitely use again.',
-    name: 'David C.',
-    location: 'Hang Dong',
+    title: 'Clear request updates',
+    desc: 'Submit the details once and receive follow-up on technician availability, timing, and next steps.',
   },
 ];
 
@@ -45,7 +41,7 @@ export function TrustSection() {
             Built for expats, by design
           </h2>
           <p className="text-muted max-w-xl mx-auto text-base">
-            We handle the language barrier, the vetting, and the logistics — so you get the result without the stress.
+            We handle the language barrier and request coordination — so your home service starts with clarity, not guesswork.
           </p>
         </div>
 
@@ -65,26 +61,22 @@ export function TrustSection() {
           })}
         </div>
 
-        {/* Stat */}
+        {/* Launch-safe proof */}
         <div className="text-center mb-16">
-          <p className="font-display text-5xl font-light italic text-gold mb-2">200+</p>
+          <p className="font-display text-5xl font-light italic text-gold mb-2">Pilot</p>
           <p className="text-sm text-muted tracking-wide uppercase font-medium">
-            Jobs completed in Chiang Mai
+            Service for Chiang Mai expat homeowners
           </p>
         </div>
 
-        {/* Testimonials */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {testimonials.map((t) => (
+          {pilotProof.map((item) => (
             <div
-              key={t.name}
-              className="bg-surface border border-border-line rounded-lg p-8 border-l-2 border-l-gold"
+              key={item.title}
+              className="bg-surface border border-border-line rounded-lg p-8"
             >
-              <p className="text-base text-ink leading-relaxed italic mb-5">"{t.quote}"</p>
-              <div>
-                <p className="text-sm font-semibold text-ink">{t.name}</p>
-                <p className="text-xs text-muted">{t.location}</p>
-              </div>
+              <p className="text-sm font-semibold text-ink mb-3">{item.title}</p>
+              <p className="text-base text-ink leading-relaxed">{item.desc}</p>
             </div>
           ))}
         </div>

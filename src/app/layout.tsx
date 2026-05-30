@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     template: '%s | OneHandy',
   },
   description:
-    'Vetted technicians, English support, and secure payment for expat homeowners in Chiang Mai.',
+    'English-speaking home service coordination and a pilot technician network for expat homeowners in Chiang Mai.',
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL || 'https://onehandy.com'
   ),

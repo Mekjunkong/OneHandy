@@ -12,15 +12,12 @@ interface ServiceCardProps {
   variant?: 'default' | 'compact';
 }
 
-export function ServiceCard({ service, variant = 'default' }: ServiceCardProps) {
+export function ServiceCard({ service }: ServiceCardProps) {
   const Icon = iconMap[service.icon] || Home;
 
   return (
-    <Link
-      href={`/services/${service.slug}`}
-      className="group block bg-surface border border-border-line rounded-lg hover:border-gold hover:shadow-sm transition-all duration-150"
-    >
-      <div className="p-6">
+    <article className="group bg-surface border border-border-line rounded-lg hover:border-gold hover:shadow-sm transition-all duration-150">
+      <Link href={`/services/${service.slug}`} className="block p-6 pb-4">
         <div className="flex items-start justify-between mb-4">
           <div className="w-10 h-10 rounded-sm bg-cream flex items-center justify-center">
             <Icon size={20} className="text-muted group-hover:text-gold transition-colors" />
@@ -38,7 +35,15 @@ export function ServiceCard({ service, variant = 'default' }: ServiceCardProps) 
             View details <ArrowRight size={12} />
           </span>
         </div>
+      </Link>
+      <div className="px-6 pb-6">
+        <Link
+          href={`/book?step=1&service=${service.slug}`}
+          className="inline-flex w-full items-center justify-center gap-1 rounded-sm border border-border-line px-4 py-2 text-xs font-semibold text-ink transition-colors hover:border-gold hover:text-gold"
+        >
+          Request this service <ArrowRight size={12} />
+        </Link>
       </div>
-    </Link>
+    </article>
   );
 }

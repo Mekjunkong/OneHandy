@@ -1,0 +1,198 @@
+# OneHandy T7 Verification Report
+Repo: /Users/pasuthunjunkong/workspace/OneHandy
+Timestamp: 2026-05-21T13:33:06+07:00
+
+## Git status
+ M src/app/admin/jobs/page.tsx
+ M src/app/admin/layout.tsx
+ M src/app/admin/page.tsx
+ M src/app/admin/payments/page.tsx
+ M src/app/admin/technicians/page.tsx
+ M src/app/api/admin/verify-pin/route.ts
+ M src/app/book/confirmation/page.tsx
+ M src/app/book/page.tsx
+ M src/app/how-it-works/page.tsx
+ M src/app/layout.tsx
+ M src/app/pricing/page.tsx
+ M src/components/admin/PaymentsTable.tsx
+ M src/components/admin/TechniciansTable.tsx
+ M src/components/booking/BookingWizard.tsx
+ M src/components/booking/StepDateTime.tsx
+ M src/components/booking/StepPayment.tsx
+ M src/components/booking/StepProperty.tsx
+ M src/components/booking/StepService.tsx
+ M src/components/home/HeroSection.tsx
+ M src/components/home/PropertyCareCTA.tsx
+ M src/components/home/ServicesPreview.tsx
+ M src/components/home/TrustSection.tsx
+ M src/components/layout/SiteFooter.tsx
+ M src/components/layout/SiteHeader.tsx
+ M src/components/services/ServiceCard.tsx
+ M src/components/services/ServicePageTemplate.tsx
+ M src/components/ui/PinGate.tsx
+ M src/lib/metadata.ts
+ M src/lib/mock-data.ts
+ M src/lib/services.ts
+?? .claude/
+?? DESIGN.md
+?? PRODUCT.md
+?? docs/kanban/
+?? src/app/terms/
+?? src/lib/contact.ts
+
+## Package scripts
+{
+  "dev": "next dev",
+  "build": "next build",
+  "start": "next start",
+  "lint": "eslint"
+}
+
+## Targeted source checks
+### Fake WhatsApp placeholder / demo / unverified proof in src
+CHECK_PASS: no fake/demo/proof terms found in src
+
+### wa.me occurrences in src
+src/lib/contact.ts:7:  whatsappUrl: normalizedWhatsAppNumber ? `https://wa.me/${normalizedWhatsAppNumber}` : null,
+CHECK_PASS: wa.me only appears in configurable contact helper
+
+### Booking URL/search param PII risks
+CHECK_PASS: no booking PII search-param reads/writes found
+
+### Allowed booking params step/service
+src/components/booking/BookingWizard.tsx:168:  params.set(STEP_PARAM, String(step));
+src/components/booking/BookingWizard.tsx:169:  if (service) params.set(SERVICE_PARAM, service);
+src/components/booking/BookingWizard.tsx:201:  const rawStep = Number(searchParams.get(STEP_PARAM) || '1');
+src/components/booking/BookingWizard.tsx:203:  const rawServiceFromUrl = searchParams.get(SERVICE_PARAM) || '';
+
+### Admin PIN defaults
+CHECK_PASS: no obvious admin PIN default fallback strings
+
+## npm run lint
+
+> onehandy-temp@0.1.0 lint
+> eslint
+
+LINT_PASS
+
+## npm run build
+
+> onehandy-temp@0.1.0 build
+> next build
+
+⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of /Users/pasuthunjunkong/package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * /Users/pasuthunjunkong/workspace/OneHandy/package-lock.json
+
+▲ Next.js 16.2.6 (Turbopack)
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 1560ms
+  Running TypeScript ...
+  Finished TypeScript in 1590ms ...
+  Collecting page data using 7 workers ...
+  Generating static pages using 7 workers (0/26) ...
+  Generating static pages using 7 workers (6/26) 
+  Generating static pages using 7 workers (12/26) 
+  Generating static pages using 7 workers (19/26) 
+✓ Generating static pages using 7 workers (26/26) in 181ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ○ /admin
+├ ○ /admin/jobs
+├ ○ /admin/payments
+├ ○ /admin/technicians
+├ ƒ /api/admin/verify-pin
+├ ○ /book
+├ ○ /book/confirmation
+├ ○ /how-it-works
+├ ○ /join
+├ ○ /pricing
+├ ○ /privacy
+├ ○ /robots.txt
+├ ○ /services
+├ ● /services/[slug]
+│ ├ /services/ac-cleaning
+│ ├ /services/plumbing
+│ ├ /services/electrical
+│ └ [+4 more paths]
+├ ○ /sitemap.xml
+└ ○ /terms
+
+
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+ƒ  (Dynamic)  server-rendered on demand
+
+BUILD_PASS
+
+## Changed files
+src/app/admin/jobs/page.tsx
+src/app/admin/layout.tsx
+src/app/admin/page.tsx
+src/app/admin/payments/page.tsx
+src/app/admin/technicians/page.tsx
+src/app/api/admin/verify-pin/route.ts
+src/app/book/confirmation/page.tsx
+src/app/book/page.tsx
+src/app/how-it-works/page.tsx
+src/app/layout.tsx
+src/app/pricing/page.tsx
+src/components/admin/PaymentsTable.tsx
+src/components/admin/TechniciansTable.tsx
+src/components/booking/BookingWizard.tsx
+src/components/booking/StepDateTime.tsx
+src/components/booking/StepPayment.tsx
+src/components/booking/StepProperty.tsx
+src/components/booking/StepService.tsx
+src/components/home/HeroSection.tsx
+src/components/home/PropertyCareCTA.tsx
+src/components/home/ServicesPreview.tsx
+src/components/home/TrustSection.tsx
+src/components/layout/SiteFooter.tsx
+src/components/layout/SiteHeader.tsx
+src/components/services/ServiceCard.tsx
+src/components/services/ServicePageTemplate.tsx
+src/components/ui/PinGate.tsx
+src/lib/metadata.ts
+src/lib/mock-data.ts
+src/lib/services.ts
+
+## Diff stat
+ src/app/admin/jobs/page.tsx                     |   3 +-
+ src/app/admin/layout.tsx                        |   9 +-
+ src/app/admin/page.tsx                          |  16 +-
+ src/app/admin/payments/page.tsx                 |   3 +-
+ src/app/admin/technicians/page.tsx              |   3 +-
+ src/app/api/admin/verify-pin/route.ts           |  15 +-
+ src/app/book/confirmation/page.tsx              |  40 ++--
+ src/app/book/page.tsx                           |   8 +-
+ src/app/how-it-works/page.tsx                   |  42 ++--
+ src/app/layout.tsx                              |   2 +-
+ src/app/pricing/page.tsx                        |  20 +-
+ src/components/admin/PaymentsTable.tsx          |   6 +-
+ src/components/admin/TechniciansTable.tsx       |   2 +-
+ src/components/booking/BookingWizard.tsx        | 256 ++++++++++++++++++++++--
+ src/components/booking/StepDateTime.tsx         |  71 ++++---
+ src/components/booking/StepPayment.tsx          | 106 ++++------
+ src/components/booking/StepProperty.tsx         |  42 ++--
+ src/components/booking/StepService.tsx          |   2 +-
+ src/components/home/HeroSection.tsx             |  76 +++++--
+ src/components/home/PropertyCareCTA.tsx         |   4 +-
+ src/components/home/ServicesPreview.tsx         |  45 +++--
+ src/components/home/TrustSection.tsx            |  46 ++---
+ src/components/layout/SiteFooter.tsx            |  41 ++--
+ src/components/layout/SiteHeader.tsx            |   4 +-
+ src/components/services/ServiceCard.tsx         |  19 +-
+ src/components/services/ServicePageTemplate.tsx |  10 +-
+ src/components/ui/PinGate.tsx                   |  13 +-
+ src/lib/metadata.ts                             |   6 +-
+ src/lib/mock-data.ts                            |  32 +--
+ src/lib/services.ts                             |  20 +-
+ 30 files changed, 635 insertions(+), 327 deletions(-)

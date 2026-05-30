@@ -16,9 +16,9 @@ export function PaymentsTable() {
       {/* Summary cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
         {[
-          { label: 'Total Revenue', value: `฿${totalRevenue.toLocaleString()}`, sub: 'Paid jobs' },
-          { label: 'Platform Fees', value: `฿${totalFees.toLocaleString()}`, sub: '15% of revenue' },
-          { label: 'Pending Payouts', value: `฿${pending.toLocaleString()}`, sub: 'Awaiting completion' },
+          { label: 'Mock Revenue', value: `฿${totalRevenue.toLocaleString()}`, sub: 'Sample paid jobs' },
+          { label: 'Mock Platform Fees', value: `฿${totalFees.toLocaleString()}`, sub: 'Sample 15% calculation' },
+          { label: 'Mock Pending Payouts', value: `฿${pending.toLocaleString()}`, sub: 'Sample awaiting completion' },
         ].map((card) => (
           <div key={card.label} className="bg-surface border border-border-line rounded-lg p-5">
             <p className="text-xs font-semibold tracking-wide uppercase text-muted mb-1">{card.label}</p>

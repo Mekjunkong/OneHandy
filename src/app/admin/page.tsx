@@ -7,10 +7,10 @@ const pendingJobs = mockJobs.filter((j) => j.status === 'pending').length;
 const completedJobs = mockJobs.filter((j) => j.status === 'completed').length;
 
 const stats = [
-  { label: 'Total Bookings', value: mockJobs.length, icon: Briefcase, href: '/admin/jobs' },
-  { label: 'Pending Jobs', value: pendingJobs, icon: TrendingUp, href: '/admin/jobs' },
-  { label: 'Completed', value: completedJobs, icon: Briefcase, href: '/admin/jobs' },
-  { label: 'Total Revenue', value: `฿${totalRevenue.toLocaleString()}`, icon: CreditCard, href: '/admin/payments' },
+  { label: 'Mock Bookings', value: mockJobs.length, icon: Briefcase, href: '/admin/jobs' },
+  { label: 'Mock Pending Jobs', value: pendingJobs, icon: TrendingUp, href: '/admin/jobs' },
+  { label: 'Mock Completed', value: completedJobs, icon: Briefcase, href: '/admin/jobs' },
+  { label: 'Mock Revenue', value: `฿${totalRevenue.toLocaleString()}`, icon: CreditCard, href: '/admin/payments' },
 ];
 
 export default function AdminPage() {
@@ -22,7 +22,7 @@ export default function AdminPage() {
             <h1 className="font-display text-2xl font-semibold text-white">
               One<span className="text-gold">Handy</span> Admin
             </h1>
-            <p className="text-white/40 text-xs mt-1">Dashboard overview</p>
+            <p className="text-white/40 text-xs mt-1">Phase 1 mock dashboard overview</p>
           </div>
           <nav className="flex gap-6 text-sm text-white/50">
             <Link href="/admin/jobs" className="hover:text-white transition-colors">Jobs</Link>
@@ -55,9 +55,9 @@ export default function AdminPage() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {[
-            { title: 'Manage Jobs', desc: 'View and assign all active bookings', href: '/admin/jobs', icon: Briefcase },
-            { title: 'Technicians', desc: 'Manage your technician roster', href: '/admin/technicians', icon: Users },
-            { title: 'Payments', desc: 'Track revenue and payouts', href: '/admin/payments', icon: CreditCard },
+            { title: 'Manage Jobs', desc: 'View and assign sample bookings', href: '/admin/jobs', icon: Briefcase },
+            { title: 'Technicians', desc: 'Manage the sample technician roster', href: '/admin/technicians', icon: Users },
+            { title: 'Payments', desc: 'Track mock revenue and payouts', href: '/admin/payments', icon: CreditCard },
           ].map((item) => {
             const Icon = item.icon;
             return (

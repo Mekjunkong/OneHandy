@@ -1,20 +1,17 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { CheckCircle, MessageCircle } from 'lucide-react';
 import { SiteHeader } from '@/components/layout/SiteHeader';
 import { SiteFooter } from '@/components/layout/SiteFooter';
 import { Button } from '@/components/ui/Button';
+import { contact } from '@/lib/contact';
 import { generateBookingRef } from '@/lib/utils';
 
 export default function ConfirmationPage() {
-  const [ref, setRef] = useState('');
-
-  useEffect(() => {
-    setRef(generateBookingRef());
-  }, []);
+  const [ref] = useState(() => generateBookingRef());
 
   return (
     <>
@@ -36,32 +33,37 @@ export default function ConfirmationPage() {
             transition={{ delay: 0.2 }}
           >
             <h1 className="font-display text-3xl font-semibold text-ink mb-3">
-              Booking confirmed!
+              Request received
             </h1>
             <p className="text-muted mb-6">
-              Your booking reference is{' '}
+              Your service request reference is{' '}
               <span className="font-mono font-semibold text-ink">{ref}</span>
             </p>
 
             <div className="bg-surface border border-border-line rounded-lg p-6 text-left mb-8">
               <p className="text-sm text-ink leading-relaxed">
-                You'll receive a{' '}
-                <span className="font-semibold">WhatsApp message within 2 hours</span>{' '}
-                to confirm your technician and exact arrival time. Please keep your phone available.
+                {contact.followUpCopy} This is not a paid or confirmed booking yet.
               </p>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <a
-                href="https://wa.me/66800000000"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Button variant="primary" size="lg">
+              {contact.whatsappUrl ? (
+                <a
+                  href={contact.whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Button variant="primary" size="lg">
+                    <MessageCircle size={16} className="mr-2" />
+                    {contact.whatsappLabel}
+                  </Button>
+                </a>
+              ) : (
+                <Button variant="primary" size="lg" disabled className="opacity-70 cursor-not-allowed">
                   <MessageCircle size={16} className="mr-2" />
-                  Message us now
+                  Follow-up coming soon
                 </Button>
-              </a>
+              )}
               <Link href="/">
                 <Button variant="outline" size="lg">
                   Return to Home

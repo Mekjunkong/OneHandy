@@ -1,26 +1,26 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { Lock, CreditCard, Info } from 'lucide-react';
 import { services } from '@/lib/services';
 import { Button } from '@/components/ui/Button';
+import { isDateTimeStepValid, isPropertyStepValid, isServiceStepValid, type BookingData } from './BookingWizard';
 
 interface StepPaymentProps {
-  params: URLSearchParams;
+  draft: BookingData;
   onBack: () => void;
+  onSubmit: () => void;
 }
 
-export function StepPayment({ params, onBack }: StepPaymentProps) {
-  const router = useRouter();
+export function StepPayment({ draft, onBack, onSubmit }: StepPaymentProps) {
   const [showTooltip, setShowTooltip] = useState(false);
 
-  const serviceSlug = params.get('service') || '';
-  const service = services.find((s) => s.slug === serviceSlug);
-  const date = params.get('date') || '';
-  const timeWindow = params.get('timeWindow') || '';
-  const address = decodeURIComponent(params.get('address') || '');
-  const name = decodeURIComponent(params.get('name') || '');
+  const service = services.find((s) => s.slug === draft.service);
+  const canSubmit = isServiceStepValid(draft) && isPropertyStepValid(draft) && isDateTimeStepValid(draft);
+  const guidePriceLabel = service?.type === 'QUOTE' ? 'Quote basis' : 'Guide price';
+  const guidePriceValue = service?.type === 'QUOTE'
+    ? `${service.price} — final quote required`
+    : service?.price || 'To be confirmed';
 
   const timeLabels: Record<string, string> = {
     morning: 'Morning (8–12)',
@@ -28,27 +28,26 @@ export function StepPayment({ params, onBack }: StepPaymentProps) {
     evening: 'Evening (17–20)',
   };
 
-  const handleConfirm = () => {
-    router.push('/book/confirmation');
-  };
 
   return (
     <div>
-      <h2 className="font-display text-2xl font-semibold text-ink mb-2">Review & Pay</h2>
-      <p className="text-muted text-sm mb-8">Confirm your booking details before payment.</p>
+      <h2 className="font-display text-2xl font-semibold text-ink mb-2">Review Request</h2>
+      <p className="text-muted text-sm mb-8">
+        Review your service request. No payment is taken until availability and details are confirmed.
+      </p>
 
-      {/* Order summary */}
+      {/* Request summary */}
       <div className="bg-surface border border-border-line rounded-lg overflow-hidden mb-6">
         <div className="px-6 py-4 border-b border-border-line bg-cream">
-          <p className="text-xs font-semibold tracking-widest uppercase text-muted">Booking Summary</p>
+          <p className="text-xs font-semibold tracking-widest uppercase text-muted">Request Summary</p>
         </div>
         <div className="px-6 py-5 space-y-3">
           {[
             { label: 'Service', value: service?.name || '—' },
-            { label: 'Address', value: address || '—' },
-            { label: 'Date', value: date ? new Date(date + 'T12:00:00').toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }) : '—' },
-            { label: 'Time', value: timeWindow ? timeLabels[timeWindow] : '—' },
-            { label: 'Contact', value: name || '—' },
+            { label: 'Address', value: draft.address || '—' },
+            { label: 'Date', value: draft.date ? new Date(draft.date + 'T12:00:00').toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }) : '—' },
+            { label: 'Time', value: draft.timeWindow ? timeLabels[draft.timeWindow] : '—' },
+            { label: 'Contact', value: draft.name || '—' },
           ].map(({ label, value }) => (
             <div key={label} className="flex items-start justify-between gap-4">
               <span className="text-xs text-muted shrink-0 pt-0.5">{label}</span>
@@ -57,53 +56,26 @@ export function StepPayment({ params, onBack }: StepPaymentProps) {
           ))}
         </div>
         <div className="px-6 py-4 bg-cream border-t border-border-line flex items-center justify-between">
-          <span className="text-sm font-semibold text-ink">Total</span>
-          <span className="text-lg font-semibold text-ink">{service?.price || '—'}</span>
+          <span className="text-sm font-semibold text-ink">{guidePriceLabel}</span>
+          <span className="text-lg font-semibold text-ink text-right">{guidePriceValue}</span>
         </div>
       </div>
 
-      {/* Placeholder payment form */}
+      {/* Phase 1 payment status */}
       <div className="bg-surface border border-border-line rounded-lg p-6 mb-6">
-        <div className="flex items-center gap-2 mb-5">
+        <div className="flex items-center gap-2 mb-3">
           <CreditCard size={16} className="text-muted" />
           <span className="text-xs font-semibold tracking-widest uppercase text-muted">
-            Payment Details
+            Payment after confirmation
           </span>
         </div>
-        <div className="space-y-3 opacity-60 pointer-events-none">
-          <div>
-            <label className="block text-xs text-muted mb-1.5">Card Number</label>
-            <input
-              type="text"
-              placeholder="1234 5678 9012 3456"
-              readOnly
-              className="w-full h-11 px-4 border border-border-line rounded-sm bg-cream text-sm text-muted"
-            />
-          </div>
-          <div className="grid grid-cols-2 gap-3">
-            <div>
-              <label className="block text-xs text-muted mb-1.5">Expiry</label>
-              <input
-                type="text"
-                placeholder="MM / YY"
-                readOnly
-                className="w-full h-11 px-4 border border-border-line rounded-sm bg-cream text-sm text-muted"
-              />
-            </div>
-            <div>
-              <label className="block text-xs text-muted mb-1.5">CVC</label>
-              <input
-                type="text"
-                placeholder="•••"
-                readOnly
-                className="w-full h-11 px-4 border border-border-line rounded-sm bg-cream text-sm text-muted"
-              />
-            </div>
-          </div>
-        </div>
+        <p className="text-sm text-muted leading-relaxed">
+          Online payment is not collected in this request step. OneHandy will confirm technician availability,
+          final timing, quote items where needed, and any payment instructions before the service proceeds.
+        </p>
       </div>
 
-      {/* Confirm button with tooltip */}
+      {/* Disabled future payment button */}
       <div className="relative mb-4">
         <div
           className="relative"
@@ -117,27 +89,33 @@ export function StepPayment({ params, onBack }: StepPaymentProps) {
             disabled
           >
             <Lock size={14} className="mr-2" />
-            Pay {service?.price} & Confirm Booking
+            Online payment after availability is confirmed
           </Button>
           {showTooltip && (
             <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 bg-ink text-cream text-xs rounded-sm whitespace-nowrap z-10">
-              Payments launching soon
+              Payment is not collected during the Phase 1 request flow
               <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-ink" />
             </div>
           )}
         </div>
       </div>
 
-      {/* Bypass button for Phase 1 */}
-      <Button variant="outline" size="lg" className="w-full mb-6" onClick={handleConfirm}>
-        Confirm Booking (Demo)
+      <Button variant="outline" size="lg" className="w-full mb-6" disabled={!canSubmit} onClick={onSubmit}>
+        Submit Service Request
       </Button>
+
+      {!canSubmit && (
+        <p className="text-xs text-error text-center mb-4">
+          Please complete the required service, property, date, and contact details before submitting.
+        </p>
+      )}
 
       {/* Fine print */}
       <div className="flex items-start gap-2 p-4 bg-surface border border-border-line rounded-lg text-xs text-muted leading-relaxed">
         <Info size={14} className="shrink-0 mt-0.5" />
         <p>
-          Your card will not be charged until our team confirms technician availability. You'll receive a WhatsApp confirmation within 2 hours.
+          Submitting this request does not confirm a paid booking. Our team will follow up to confirm availability,
+          arrival details, and next steps.
         </p>
       </div>
 

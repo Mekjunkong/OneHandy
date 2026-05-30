@@ -29,7 +29,7 @@ export const services: Service[] = [
       'Coil and fan blade cleaning',
       'Drainage pipe flush',
       'Performance test on completion',
-      'Before & after photos via WhatsApp',
+      'Before & after photo updates',
     ],
     faq: [
       { q: 'How often should I clean my AC?', a: 'Every 3–6 months, or more frequently in dusty conditions or heavy use.' },
@@ -57,7 +57,7 @@ export const services: Service[] = [
     ],
     faq: [
       { q: 'Is the ฿1,200 price inclusive of parts?', a: 'The base rate covers labour. Parts are quoted separately and approved before purchase.' },
-      { q: 'Do you handle emergency leaks?', a: 'Yes — for urgent issues, select Emergency Callout for priority dispatch.' },
+      { q: 'Do you handle emergency leaks?', a: 'Yes — for urgent issues, select Emergency Callout so we can triage the request and check technician availability.' },
       { q: 'What brands of fixtures do you work with?', a: 'All standard residential brands available in Thailand.' },
       { q: 'Can you install new fixtures?', a: 'Yes, new fixture installations are within scope.' },
     ],
@@ -138,16 +138,16 @@ export const services: Service[] = [
   {
     slug: 'emergency',
     name: 'Emergency Callout',
-    shortDesc: 'Urgent issues attended within 2 hours',
+    shortDesc: 'Urgent issues triaged for availability follow-up',
     type: 'FIXED',
     price: '฿500 + parts',
-    duration: 'Within 2 hrs',
+    duration: 'Availability requested',
     icon: 'AlertTriangle',
     description:
-      'Priority dispatch for urgent home emergencies — leaks, power failures, lockouts, and more.',
+      'Urgent request path for home issues such as leaks, power failures, lockouts, and safety concerns. We triage the request and follow up with availability and next steps.',
     includes: [
-      'Priority dispatch within 2 hours',
-      'Available 7 days a week',
+      'Urgent request triage',
+      'Availability follow-up before dispatch',
       'Plumbing, electrical, and general emergencies',
       'Transparent parts pricing before purchase',
       'English-speaking coordination throughout',
@@ -155,8 +155,8 @@ export const services: Service[] = [
     faq: [
       { q: 'What counts as an emergency?', a: 'Active leaks, loss of power, gas concerns, structural hazards, or any situation requiring urgent attention.' },
       { q: 'Is the ฿500 the total cost?', a: "฿500 covers the callout fee. Any parts or specialist labour are quoted on-site before proceeding." },
-      { q: 'Is this available at night?', a: 'Emergency dispatch is available during extended hours. Contact us via WhatsApp for after-hours situations.' },
-      { q: 'How do I book an emergency?', a: 'Book via this page for fastest response, or message us directly on WhatsApp.' },
+      { q: 'Is this available at night?', a: 'Submit an urgent request and we will follow up if a technician is available. If there is immediate danger, contact local emergency services or your building manager first.' },
+      { q: 'How do I request urgent help?', a: 'Submit the urgent request form with the issue, area, and access details so we can triage availability and next steps.' },
     ],
   },
   {
@@ -176,7 +176,7 @@ export const services: Service[] = [
       'Coordination of any required repairs',
       'Monthly written summary report',
       'Priority booking for all services',
-      'Dedicated WhatsApp contact',
+      'Dedicated coordination channel after request approval',
     ],
     faq: [
       { q: 'How often do you visit?', a: 'Weekly visits by default, with an option for twice-weekly during monsoon season.' },

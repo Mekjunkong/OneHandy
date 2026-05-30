@@ -10,7 +10,7 @@ import {
 
 export const metadata: Metadata = {
   title: 'How It Works',
-  description: 'Three simple steps to book a vetted technician in Chiang Mai. Choose your service, we dispatch, you pay securely and get photo updates.',
+  description: 'Three simple steps to request home service support in Chiang Mai. Choose your service, we review availability, and you confirm next steps before work proceeds.',
 };
 
 const steps = [
@@ -18,42 +18,42 @@ const steps = [
     number: '01',
     icon: MousePointerClick,
     title: 'Choose your service',
-    desc: 'Browse our fixed-price menu or request a custom quote. Book online in under 2 minutes — no phone calls needed.',
+    desc: 'Browse guide prices or request a custom quote. Submit your request online in under 2 minutes — no phone calls needed.',
     details: [
       'Select from 7 services including AC cleaning, plumbing, electrical, and more',
-      'See live pricing immediately',
+      'See guide pricing immediately',
       'Choose your preferred date and time window',
     ],
   },
   {
     number: '02',
     icon: ShieldCheck,
-    title: 'We dispatch a vetted technician',
-    desc: "We match your job to the right specialist — background-checked, equipped, and briefed before they arrive.",
+    title: 'We review availability',
+    desc: 'We review the request, check the right technician path, and follow up with timing and next steps before the service is accepted.',
     details: [
-      'All technicians are verified and reference-checked',
-      "You'll receive a WhatsApp confirmation within 2 hours",
-      'Technician arrives with all necessary tools and equipment',
+      'Pilot technician network being built for Chiang Mai',
+      'Follow-up confirms availability and arrival details',
+      'Scope and pricing are clarified before work proceeds',
     ],
   },
   {
     number: '03',
     icon: CreditCard,
-    title: 'Pay securely, get photo updates',
-    desc: 'All communication and payment handled in English. Before & after photos sent via WhatsApp.',
+    title: 'Confirm details, then proceed',
+    desc: 'Communication is handled in English. Payment instructions and any service documentation are confirmed after availability is reviewed.',
     details: [
-      'Secure online payment — no cash needed',
-      'Before and after photos of the completed work',
-      'English-language job report included',
+      'No payment collected during the request step',
+      'Service details confirmed before dispatch',
+      'English-language follow-up included',
     ],
   },
 ];
 
 const guarantees = [
-  { icon: Clock, title: '2-Hour Confirmation', desc: 'WhatsApp confirmation within 2 hours of booking' },
-  { icon: ShieldCheck, title: 'Vetted Technicians', desc: 'Every technician is background-checked and assessed' },
-  { icon: Phone, title: 'English Support', desc: 'All communication handled in English throughout' },
-  { icon: Camera, title: 'Photo Evidence', desc: 'Before & after photos sent for every job' },
+  { icon: Clock, title: 'Clear Follow-Up', desc: 'Availability and timing are confirmed before a service proceeds' },
+  { icon: ShieldCheck, title: 'Pilot Technician Network', desc: 'Careful technician onboarding is in progress for Chiang Mai' },
+  { icon: Phone, title: 'English Support', desc: 'Request coordination is handled in English throughout' },
+  { icon: Camera, title: 'Service Documentation', desc: 'Photos or reports can be requested when relevant to the job' },
 ];
 
 export default function HowItWorksPage() {
@@ -71,7 +71,7 @@ export default function HowItWorksPage() {
               Three steps to done
             </h1>
             <p className="text-muted text-lg max-w-lg mx-auto">
-              We've removed every friction point so you get a great result without the stress.
+              We&apos;ve removed every friction point so you get a great result without the stress.
             </p>
           </div>
         </section>
@@ -141,11 +141,11 @@ export default function HowItWorksPage() {
         {/* CTA */}
         <section className="py-20 px-6 text-center border-t border-border-line">
           <h2 className="font-display text-2xl font-light italic text-ink mb-4">
-            Ready to try it?
+            Ready to request service?
           </h2>
-          <p className="text-muted mb-8">Book your first service in under 2 minutes.</p>
+          <p className="text-muted mb-8">Submit your first request in under 2 minutes.</p>
           <Link href="/book">
-            <Button variant="primary" size="lg">Book a Service →</Button>
+            <Button variant="primary" size="lg">Request Service →</Button>
           </Link>
         </section>
       </main>

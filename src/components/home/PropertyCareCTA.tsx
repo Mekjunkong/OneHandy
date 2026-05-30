@@ -1,5 +1,10 @@
 import Link from 'next/link';
-import { Button } from '@/components/ui/Button';
+
+const btnGoldLg =
+  'inline-flex items-center justify-center font-sans font-semibold tracking-wide transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold cursor-pointer px-8 py-4 text-sm rounded-sm bg-gold text-ink hover:brightness-95';
+
+const btnOutlineLg =
+  'inline-flex items-center justify-center font-sans font-semibold tracking-wide transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold cursor-pointer px-8 py-4 text-sm rounded-sm border border-cream/30 text-cream hover:bg-cream/10 hover:border-cream/50';
 
 export function PropertyCareCTA() {
   return (
@@ -10,33 +15,23 @@ export function PropertyCareCTA() {
             <span className="text-xs font-semibold tracking-widest uppercase text-gold mb-3 block">
               Going Away?
             </span>
-            <h2 className="font-display text-3xl md:text-4xl font-light italic text-white mb-4">
-              We'll watch your home.
+            <h2 className="font-display text-3xl md:text-4xl font-light italic text-cream mb-4">
+              We&apos;ll watch your home.
             </h2>
-            <p className="text-white/60 text-base leading-relaxed">
-              Weekly inspections, photo reports, and priority repairs — all handled in English while you're away. Property care subscriptions from{' '}
-              <span className="text-gold font-semibold">฿2,500/month</span>.
+            <p className="text-cream/70 text-base leading-relaxed">
+              Coordinate home checks and service requests in English while you travel. Ask us about property coordination and we&apos;ll follow up with what&apos;s available for your area and schedule.
             </p>
           </div>
-          <div className="flex flex-col sm:flex-row gap-3 md:flex-col md:items-end shrink-0">
-            <Link href="/services/property-care">
-              <Button variant="gold" size="lg">
-                Learn More →
-              </Button>
+          <div className="flex flex-col sm:flex-row gap-3 lg:flex-col lg:items-end shrink-0">
+            <Link href="/services/property-care" className={btnGoldLg}>
+              Learn More →
             </Link>
-            <Link href="/book?step=1&service=property-care">
-              <Button
-                variant="outline"
-                size="lg"
-                className="border-white/20 text-white hover:bg-white/10 hover:text-white hover:border-white/40"
-              >
-                Get a Quote
-              </Button>
+            <Link href="/book?step=1&service=property-care" className={btnOutlineLg}>
+              Enquire
             </Link>
           </div>
         </div>
 
-        {/* Technician apply strip */}
         <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 py-5 border border-border-line rounded-lg">
           <p className="text-sm text-muted">
             Are you a skilled technician in Chiang Mai?

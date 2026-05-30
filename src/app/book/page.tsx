@@ -5,8 +5,8 @@ import { SiteFooter } from '@/components/layout/SiteFooter';
 import { BookingWizard } from '@/components/booking/BookingWizard';
 
 export const metadata: Metadata = {
-  title: 'Book a Service',
-  description: 'Book a vetted home service technician in Chiang Mai. 4-step booking — choose service, your address, date & time, then confirm.',
+  title: 'Request Service',
+  description: 'Request home service support in Chiang Mai. Choose service, share details, select a preferred time, and submit for availability follow-up.',
 };
 
 export default function BookPage() {
@@ -18,10 +18,10 @@ export default function BookPage() {
           <div className="max-w-6xl mx-auto">
             <div className="max-w-2xl mx-auto mb-10">
               <span className="text-xs font-semibold tracking-widest uppercase text-gold mb-3 block">
-                Booking
+                Service Request
               </span>
               <h1 className="font-display text-3xl font-semibold text-ink">
-                Book a service
+                Request service
               </h1>
             </div>
             <Suspense fallback={<div className="max-w-2xl mx-auto py-20 text-center text-muted text-sm">Loading…</div>}>

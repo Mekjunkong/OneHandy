@@ -29,7 +29,7 @@ export default function PricingPage() {
               Transparent pricing,<br />no surprises
             </h1>
             <p className="text-muted text-lg max-w-lg mx-auto">
-              Most services are fixed-price — what you see is what you pay. Custom quotes are provided before any work begins.
+              Most services start from clear guide prices. Final availability, timing, and any custom quotes are confirmed before work begins.
             </p>
           </div>
         </section>
@@ -95,16 +95,16 @@ export default function PricingPage() {
         <section className="py-16 px-6 bg-surface border-t border-border-line">
           <div className="max-w-3xl mx-auto">
             <h2 className="font-display text-2xl font-semibold text-ink mb-8 text-center">
-              Included with every booking
+              Included with every request
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {[
-                'English-language booking and support',
-                'WhatsApp confirmation within 2 hours',
-                'Vetted, background-checked technician',
-                'Before & after photo report',
+                'English-language request coordination',
+                'Follow-up to confirm availability and timing',
+                'Pilot technician network in progress',
+                'Clear pricing before work proceeds',
                 'No hidden fees or surprise charges',
-                'Secure online payment',
+                'Payment details confirmed after availability',
               ].map((item) => (
                 <div key={item} className="flex items-center gap-3">
                   <CheckCircle size={16} className="text-gold shrink-0" />
@@ -117,11 +117,11 @@ export default function PricingPage() {
 
         <section className="py-16 px-6 text-center border-t border-border-line">
           <h2 className="font-display text-2xl font-light italic text-ink mb-4">
-            Ready to book?
+            Ready to request service?
           </h2>
-          <p className="text-muted mb-8 text-sm">No account needed. Book in under 2 minutes.</p>
+          <p className="text-muted mb-8 text-sm">No account needed. Submit a request in under 2 minutes.</p>
           <Link href="/book">
-            <Button variant="primary" size="lg">Book a Service →</Button>
+            <Button variant="primary" size="lg">Request Service →</Button>
           </Link>
         </section>
       </main>

@@ -50,7 +50,7 @@ export function ServicePageTemplate({ service }: ServicePageTemplateProps) {
           </div>
           <Link href={`/book?step=1&service=${service.slug}`}>
             <Button variant="primary" size="lg">
-              Book This Service →
+              Request This Service →
             </Button>
           </Link>
         </div>
@@ -59,7 +59,7 @@ export function ServicePageTemplate({ service }: ServicePageTemplateProps) {
       {/* What's Included */}
       <section className="py-16 px-6 bg-surface">
         <div className="max-w-3xl mx-auto">
-          <h2 className="font-display text-2xl font-semibold text-ink mb-8">What's Included</h2>
+          <h2 className="font-display text-2xl font-semibold text-ink mb-8">What&apos;s Included</h2>
           <ul className="space-y-3">
             {service.includes.map((item) => (
               <li key={item} className="flex items-start gap-3">
@@ -165,14 +165,14 @@ export function ServicePageTemplate({ service }: ServicePageTemplateProps) {
       <section className="py-16 px-6 bg-charcoal">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="font-display text-2xl font-light italic text-white mb-4">
-            Ready to book your {service.name.toLowerCase()}?
+            Ready to request your {service.name.toLowerCase()}?
           </h2>
           <p className="text-white/50 text-sm mb-8">
-            English support · Vetted technicians · Secure payment
+            English support · Availability follow-up · Clear next steps
           </p>
           <Link href={`/book?step=1&service=${service.slug}`}>
             <Button variant="gold" size="lg">
-              Book Now — {service.price}
+              Check Availability — {service.price}
             </Button>
           </Link>
         </div>

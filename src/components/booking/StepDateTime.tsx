@@ -2,6 +2,14 @@
 
 import { useState } from 'react';
 import { Button } from '@/components/ui/Button';
+import {
+  getMaxBookingDate,
+  getMinBookingDate,
+  isDateTimeStepValid,
+  isValidEmail,
+  isValidPhone,
+  type BookingData,
+} from './BookingWizard';
 
 const timeWindows = [
   { value: 'morning', label: 'Morning', desc: '8:00 – 12:00' },
@@ -9,43 +17,36 @@ const timeWindows = [
   { value: 'evening', label: 'Evening', desc: '17:00 – 20:00' },
 ];
 
-function getMinDate() {
-  const d = new Date();
-  d.setDate(d.getDate() + 1);
-  return d.toISOString().split('T')[0];
-}
-
-function getMaxDate() {
-  const d = new Date();
-  d.setDate(d.getDate() + 30);
-  return d.toISOString().split('T')[0];
-}
-
 interface StepDateTimeProps {
-  service: string;
-  onNext: (data?: Record<string, string>) => void;
+  draft: BookingData;
+  onNext: (data?: Partial<BookingData>) => void;
   onBack: () => void;
 }
 
-export function StepDateTime({ service, onNext, onBack }: StepDateTimeProps) {
-  const [date, setDate] = useState('');
-  const [timeWindow, setTimeWindow] = useState('');
-  const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
-  const [email, setEmail] = useState('');
-  const [notes, setNotes] = useState('');
+export function StepDateTime({ draft, onNext, onBack }: StepDateTimeProps) {
+  const [date, setDate] = useState(draft.date);
+  const [timeWindow, setTimeWindow] = useState(draft.timeWindow);
+  const [name, setName] = useState(draft.name);
+  const [phone, setPhone] = useState(draft.phone);
+  const [email, setEmail] = useState(draft.email);
+  const [notes, setNotes] = useState(draft.notes);
 
-  const isValid = date && timeWindow && name.trim() && phone.trim() && email.trim();
+  const nextData = {
+    date,
+    timeWindow,
+    name: name.trim(),
+    phone: phone.trim(),
+    email: email.trim(),
+    notes: notes.trim(),
+  };
+  const isValid = isDateTimeStepValid({ ...draft, ...nextData });
+  const showPhoneHint = phone.trim().length > 0 && !isValidPhone(phone);
+  const showEmailHint = email.trim().length > 0 && !isValidEmail(email);
 
   const handleNext = () => {
-    onNext({
-      date,
-      timeWindow,
-      name: encodeURIComponent(name),
-      phone: encodeURIComponent(phone),
-      email: encodeURIComponent(email),
-      notes: encodeURIComponent(notes),
-    });
+    if (!isValid) return;
+
+    onNext(nextData);
   };
 
   const inputClass =
@@ -64,8 +65,8 @@ export function StepDateTime({ service, onNext, onBack }: StepDateTimeProps) {
         <input
           type="date"
           value={date}
-          min={getMinDate()}
-          max={getMaxDate()}
+          min={getMinBookingDate()}
+          max={getMaxBookingDate()}
           onChange={(e) => setDate(e.target.value)}
           className={inputClass}
         />
@@ -115,6 +116,9 @@ export function StepDateTime({ service, onNext, onBack }: StepDateTimeProps) {
               placeholder="+66 80 000 0000"
               className={inputClass}
             />
+            {showPhoneHint && (
+              <p className="text-xs text-error mt-1">Use 8–15 digits. Spaces, dashes, brackets, and + are OK.</p>
+            )}
           </div>
           <div>
             <label className={labelClass}>Email *</label>
@@ -125,6 +129,9 @@ export function StepDateTime({ service, onNext, onBack }: StepDateTimeProps) {
               placeholder="your@email.com"
               className={inputClass}
             />
+            {showEmailHint && (
+              <p className="text-xs text-error mt-1">Enter a valid email address, for example name@example.com.</p>
+            )}
           </div>
           <div>
             <label className={labelClass}>
