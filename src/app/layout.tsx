@@ -19,18 +19,40 @@ const dmSans = DM_Sans({
 
 export const metadata: Metadata = {
   title: {
-    default: 'OneHandy — Home Services in Chiang Mai',
+    default: 'OneHandy — Home Services for Expats in Chiang Mai',
     template: '%s | OneHandy',
   },
   description:
-    'English-speaking home service coordination and a pilot technician network for expat homeowners in Chiang Mai.',
+    'English-speaking home repair and property care in Chiang Mai for expats, remote owners, Airbnb hosts, and landlords — AC cleaning, plumbing, electrical, emergency repairs, WhatsApp updates, and photo proof.',
+  keywords: [
+    'AC Cleaning Chiang Mai',
+    'English Speaking Plumber Chiang Mai',
+    'Electrician Chiang Mai',
+    'Property Care Chiang Mai',
+    'Home Services for Expats in Chiang Mai',
+    'Airbnb Maintenance Chiang Mai',
+    'Emergency Home Repair Chiang Mai',
+  ],
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL || 'https://onehandy.com'
   ),
+  alternates: {
+    canonical: '/',
+  },
   openGraph: {
+    title: 'OneHandy — Home Services for Expats in Chiang Mai',
+    description:
+      'English-speaking home repair and property care in Chiang Mai for expats, remote owners, Airbnb hosts, and landlords.',
+    url: '/',
     siteName: 'OneHandy',
     locale: 'en_US',
     type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'OneHandy — Home Services for Expats in Chiang Mai',
+    description:
+      'English-speaking home repair and property care in Chiang Mai with WhatsApp updates and photo proof.',
   },
 };
 

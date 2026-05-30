@@ -65,13 +65,13 @@ export const services: Service[] = [
   {
     slug: 'electrical',
     name: 'Electrical',
-    shortDesc: 'Safe, certified electrical work at your home',
+    shortDesc: 'Safe electrical troubleshooting coordinated for your home',
     type: 'FIXED',
     price: 'from ฿1,000',
     duration: '1–2 hrs',
     icon: 'Zap',
     description:
-      'Licensed electricians for repairs, installations, and safety checks across your property.',
+      'Electrical troubleshooting, repairs, installations, and safety checks coordinated with suitable local technicians.',
     includes: [
       'Circuit breaker and fuse box inspection',
       'Outlet and switch repairs/replacement',
@@ -80,10 +80,10 @@ export const services: Service[] = [
       'Completion report with photos',
     ],
     faq: [
-      { q: 'Are your electricians licensed?', a: 'Yes, all our electricians hold valid Thai electrical licences.' },
+      { q: 'Who handles electrical jobs?', a: 'We coordinate suitable local technicians for each request and confirm scope, availability, and safety expectations before work proceeds.' },
       { q: 'Can you install ceiling fans?', a: 'Yes, ceiling fan installation is a standard service.' },
       { q: 'What if the problem requires rewiring?', a: 'Major rewiring jobs are quoted as a separate project.' },
-      { q: 'Is there a safety guarantee?', a: 'All electrical work is inspected and signed off before the technician leaves.' },
+      { q: 'How do you handle safety?', a: 'Electrical requests are triaged carefully. If a problem is dangerous or beyond residential service scope, contact your building manager or local emergency support first.' },
     ],
   },
   {
@@ -132,7 +132,7 @@ export const services: Service[] = [
       { q: 'How is the quote calculated?', a: "After a roof inspection, we provide a written quote covering materials and labour. No work starts without your approval." },
       { q: 'How long do repairs take?', a: 'Minor repairs 1–2 days. Full re-roofing 3–7 days depending on size.' },
       { q: 'Do you work during the rainy season?', a: 'We schedule around weather forecasts and prioritise emergency repairs.' },
-      { q: 'Is there a workmanship guarantee?', a: 'Yes — 12-month workmanship guarantee on all roof repairs.' },
+      { q: 'How is follow-up handled?', a: 'Repair scope, photos, and any recommended next steps are shared after inspection so you can approve work clearly.' },
     ],
   },
   {
