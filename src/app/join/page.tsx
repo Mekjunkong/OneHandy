@@ -8,7 +8,7 @@ import { CheckCircle, Banknote, Clock, Globe } from 'lucide-react';
 import { services } from '@/lib/services';
 
 const benefits = [
-  { icon: Banknote, title: 'Guaranteed Payments', desc: 'Get paid on time, every time. No chasing clients.' },
+  { icon: Banknote, title: 'Clear Payment Coordination', desc: 'OneHandy confirms price and payment expectations before work is accepted.' },
   { icon: Globe, title: 'English-Speaking Clients', desc: 'We handle all communication in English for you.' },
   { icon: Clock, title: 'Flexible Schedule', desc: 'Accept jobs that fit your availability.' },
   { icon: CheckCircle, title: 'Grow Your Business', desc: "We handle marketing and bookings — you focus on the work." },
@@ -16,6 +16,9 @@ const benefits = [
 
 export default function JoinPage() {
   const [submitted, setSubmitted] = useState(false);
+  const [reference, setReference] = useState('');
+  const [error, setError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [form, setForm] = useState({
     name: '', phone: '', whatsapp: '', experience: '',
     tools: '', previousWork: '', backgroundCheck: false,
@@ -28,9 +31,45 @@ export default function JoinPage() {
     );
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setError('');
+
+    if (selectedServices.length === 0) {
+      setError('Choose at least one service you can offer.');
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch('/api/technician-applications', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: form.name,
+          phone: form.phone,
+          whatsapp: form.whatsapp,
+          yearsExperience: form.experience,
+          serviceSlugs: selectedServices,
+          tools: form.tools,
+          previousWork: form.previousWork,
+          consentBackgroundCheck: form.backgroundCheck,
+        }),
+      });
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.message || 'We could not submit your application. Please try again.');
+      }
+
+      setReference(result.application.id);
+      setSubmitted(true);
+    } catch (submitError) {
+      setError(submitError instanceof Error ? submitError.message : 'We could not submit your application. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const inputClass =
@@ -48,8 +87,11 @@ export default function JoinPage() {
             </div>
             <h1 className="font-display text-2xl font-semibold text-ink mb-3">Application submitted!</h1>
             <p className="text-muted text-sm leading-relaxed">
-              Thanks for applying to join the OneHandy network. Our team will review your application and reach out via WhatsApp within 3–5 business days.
+              Thanks for applying to join the OneHandy network. Our team will review your application and reach out via WhatsApp after the first screening step.
             </p>
+            {reference && (
+              <p className="mt-5 font-mono text-sm font-semibold text-ink">{reference}</p>
+            )}
           </div>
         </main>
         <SiteFooter />
@@ -71,7 +113,7 @@ export default function JoinPage() {
               Join the OneHandy Network
             </h1>
             <p className="text-muted text-lg max-w-xl">
-              We connect skilled technicians in Chiang Mai with verified expat homeowners who pay on time and communicate in English.
+              We connect skilled technicians in Chiang Mai with English-speaking homeowners after each request is reviewed and confirmed.
             </p>
           </div>
         </section>
@@ -157,6 +199,7 @@ export default function JoinPage() {
               <div>
                 <label className={labelClass}>Work Portfolio / ID <span className="normal-case font-normal">(optional)</span></label>
                 <input type="file" accept="image/*,.pdf" className="w-full h-11 px-4 border border-border-line rounded-sm bg-surface text-sm text-muted file:mr-4 file:py-1 file:px-3 file:border-0 file:text-xs file:font-medium file:bg-cream file:text-ink cursor-pointer" />
+                <p className="text-xs text-muted mt-2">File upload is collected during follow-up for V1 so your documents are not stored before screening.</p>
               </div>
 
               <div className="flex items-start gap-3 p-4 bg-surface border border-border-line rounded-lg">
@@ -173,8 +216,12 @@ export default function JoinPage() {
                 </label>
               </div>
 
-              <Button type="submit" variant="primary" size="lg" className="w-full">
-                Submit Application
+              {error && (
+                <p className="text-sm text-error">{error}</p>
+              )}
+
+              <Button type="submit" variant="primary" size="lg" className="w-full" disabled={isSubmitting}>
+                {isSubmitting ? 'Submitting Application...' : 'Submit Application'}
               </Button>
             </form>
           </div>

@@ -8,6 +8,13 @@ import { StepProperty } from './StepProperty';
 import { StepDateTime } from './StepDateTime';
 import { StepPayment } from './StepPayment';
 import { services } from '@/lib/services';
+import {
+  BOOKING_DRAFT_KEY,
+  getSafeBookingSearch,
+  getSafeBookingUrl,
+  LAST_REQUEST_REF_KEY,
+  SAFE_BOOKING_PARAMS,
+} from '@/lib/booking-url';
 
 export interface BookingData {
   service: string;
@@ -25,8 +32,6 @@ export interface BookingData {
 }
 
 const STEP_LABELS = ['Service', 'Property', 'Date & Time', 'Review Request'];
-const BOOKING_DRAFT_KEY = 'onehandy_booking_draft';
-const SAFE_BOOKING_PARAMS = ['step', 'service'] as const;
 const [STEP_PARAM, SERVICE_PARAM] = SAFE_BOOKING_PARAMS;
 
 const EMPTY_DRAFT: BookingData = {
@@ -163,21 +168,6 @@ function clearStoredDraft() {
   }
 }
 
-function getSafeBookingUrl(step: number, service: string) {
-  const params = new URLSearchParams();
-  params.set(STEP_PARAM, String(step));
-  if (service) params.set(SERVICE_PARAM, service);
-  return `/book?${params.toString()}`;
-}
-
-function getSafeParams(step: number, service: string) {
-  const safeParams = new URLSearchParams();
-  safeParams.set(STEP_PARAM, String(step));
-  if (service) safeParams.set(SERVICE_PARAM, service);
-
-  return safeParams.toString();
-}
-
 function getInitialDraft(service: string): BookingData {
   const storedDraft = getStoredDraft();
   const storedAcUnits = Number(storedDraft?.acUnits || EMPTY_DRAFT.acUnits);
@@ -203,10 +193,12 @@ export function BookingWizard() {
   const rawServiceFromUrl = searchParams.get(SERVICE_PARAM) || '';
   const serviceFromUrl = VALID_SERVICE_SLUGS.has(rawServiceFromUrl) ? rawServiceFromUrl : '';
   const [draft, setDraft] = useState<BookingData>(() => getInitialDraft(serviceFromUrl));
+  const [submitError, setSubmitError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const step = clampStepToCompletedRequirements(requestedStep, draft);
 
   const safeSearch = useMemo(
-    () => getSafeParams(step, serviceFromUrl || draft.service),
+    () => getSafeBookingSearch(step, serviceFromUrl || draft.service),
     [draft.service, serviceFromUrl, step]
   );
 
@@ -255,7 +247,7 @@ export function BookingWizard() {
     updateDraftAndStep(Math.min(step + 1, getFirstAllowedStep(nextDraft)), data);
   };
   const goBack = () => updateDraftAndStep(Math.max(1, step - 1));
-  const submitRequest = () => {
+  const submitRequest = async () => {
     const firstAllowedStep = getFirstAllowedStep(draft);
 
     if (firstAllowedStep < STEP_LABELS.length) {
@@ -263,8 +255,29 @@ export function BookingWizard() {
       return;
     }
 
-    clearStoredDraft();
-    router.push('/book/confirmation');
+    setSubmitError('');
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch('/api/service-requests', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(draft),
+      });
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.message || 'We could not submit your request. Please try again.');
+      }
+
+      clearStoredDraft();
+      window.sessionStorage.setItem(LAST_REQUEST_REF_KEY, result.request.id);
+      router.push('/book/confirmation');
+    } catch (error) {
+      setSubmitError(error instanceof Error ? error.message : 'We could not submit your request. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -295,10 +308,16 @@ export function BookingWizard() {
         <StepDateTime draft={draft} onNext={goNext} onBack={goBack} />
       )}
       {step === 4 && (
-        <StepPayment draft={draft} onBack={goBack} onSubmit={submitRequest} />
+        <StepPayment
+          draft={draft}
+          error={submitError}
+          isSubmitting={isSubmitting}
+          onBack={goBack}
+          onSubmit={submitRequest}
+        />
       )}
     </div>
   );
 }
 
-export { BOOKING_DRAFT_KEY, SAFE_BOOKING_PARAMS };
+export { BOOKING_DRAFT_KEY, LAST_REQUEST_REF_KEY, SAFE_BOOKING_PARAMS };

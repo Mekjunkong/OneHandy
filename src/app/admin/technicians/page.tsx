@@ -1,27 +1,30 @@
-import Link from 'next/link';
-import { TechniciansTable } from '@/components/admin/TechniciansTable';
+import { AdminNotice } from '@/components/admin/AdminNotice';
+import { AdminShell } from '@/components/admin/AdminShell';
+import { TechnicianApplicationsPanel } from '@/components/admin/TechnicianApplicationsPanel';
+import { requireAdminSession } from '@/lib/admin-auth';
+import { isDatabaseConfigured } from '@/lib/db';
+import { listTechnicianApplications } from '@/lib/repositories';
 
-export default function AdminTechniciansPage() {
+export const dynamic = 'force-dynamic';
+
+export default async function AdminTechniciansPage() {
+  await requireAdminSession();
+
+  if (!isDatabaseConfigured()) {
+    return (
+      <AdminShell title="Technicians" subtitle="Technician applications will appear here after setup.">
+        <AdminNotice title="DATABASE_URL is not configured">
+          Configure the database and run migrations before reviewing technician applications.
+        </AdminNotice>
+      </AdminShell>
+    );
+  }
+
+  const applications = await listTechnicianApplications(200);
+
   return (
-    <main className="min-h-screen bg-cream">
-      <div className="bg-charcoal px-8 py-5 border-b border-white/10">
-        <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <Link href="/admin" className="text-white/40 hover:text-white text-sm transition-colors">Dashboard</Link>
-            <span className="text-white/20">/</span>
-            <span className="text-white text-sm font-medium">Technicians</span>
-          </div>
-          <nav className="flex gap-6 text-sm text-white/50">
-            <Link href="/admin/jobs" className="hover:text-white transition-colors">Jobs</Link>
-            <Link href="/admin/payments" className="hover:text-white transition-colors">Payments</Link>
-          </nav>
-        </div>
-      </div>
-      <div className="max-w-6xl mx-auto px-8 py-10">
-        <h1 className="font-display text-2xl font-semibold text-ink mb-2">Sample Technicians</h1>
-        <p className="text-sm text-muted mb-8">Mock technician roster for Phase 1 admin UI review only.</p>
-        <TechniciansTable />
-      </div>
-    </main>
+    <AdminShell title="Technicians" subtitle="Review partner applications and keep vetting notes in one place.">
+      <TechnicianApplicationsPanel applications={applications} />
+    </AdminShell>
   );
 }

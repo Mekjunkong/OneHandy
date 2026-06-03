@@ -1,27 +1,5 @@
-import Link from 'next/link';
-import { PaymentsTable } from '@/components/admin/PaymentsTable';
+import { redirect } from 'next/navigation';
 
-export default function AdminPaymentsPage() {
-  return (
-    <main className="min-h-screen bg-cream">
-      <div className="bg-charcoal px-8 py-5 border-b border-white/10">
-        <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <Link href="/admin" className="text-white/40 hover:text-white text-sm transition-colors">Dashboard</Link>
-            <span className="text-white/20">/</span>
-            <span className="text-white text-sm font-medium">Payments</span>
-          </div>
-          <nav className="flex gap-6 text-sm text-white/50">
-            <Link href="/admin/jobs" className="hover:text-white transition-colors">Jobs</Link>
-            <Link href="/admin/technicians" className="hover:text-white transition-colors">Technicians</Link>
-          </nav>
-        </div>
-      </div>
-      <div className="max-w-6xl mx-auto px-8 py-10">
-        <h1 className="font-display text-2xl font-semibold text-ink mb-2">Sample Payments</h1>
-        <p className="text-sm text-muted mb-8">Mock payment figures only; not live charges or payouts.</p>
-        <PaymentsTable />
-      </div>
-    </main>
-  );
+export default function AdminPaymentsRedirectPage() {
+  redirect('/admin/requests');
 }

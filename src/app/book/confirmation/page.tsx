@@ -8,10 +8,13 @@ import { SiteHeader } from '@/components/layout/SiteHeader';
 import { SiteFooter } from '@/components/layout/SiteFooter';
 import { Button } from '@/components/ui/Button';
 import { contact } from '@/lib/contact';
-import { generateBookingRef } from '@/lib/utils';
+import { LAST_REQUEST_REF_KEY } from '@/lib/booking-url';
 
 export default function ConfirmationPage() {
-  const [ref] = useState(() => generateBookingRef());
+  const [ref] = useState(() => {
+    if (typeof window === 'undefined') return '';
+    return window.sessionStorage.getItem(LAST_REQUEST_REF_KEY) || '';
+  });
 
   return (
     <>
@@ -36,8 +39,14 @@ export default function ConfirmationPage() {
               Request received
             </h1>
             <p className="text-muted mb-6">
-              Your service request reference is{' '}
-              <span className="font-mono font-semibold text-ink">{ref}</span>
+              {ref ? (
+                <>
+                  Your service request reference is{' '}
+                  <span className="font-mono font-semibold text-ink">{ref}</span>
+                </>
+              ) : (
+                'Your service request has been submitted.'
+              )}
             </p>
 
             <div className="bg-surface border border-border-line rounded-lg p-6 text-left mb-8">

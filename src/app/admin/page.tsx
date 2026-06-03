@@ -1,83 +1,79 @@
 import Link from 'next/link';
-import { mockJobs, mockPayments } from '@/lib/mock-data';
-import { Briefcase, Users, CreditCard, TrendingUp } from 'lucide-react';
+import { AdminNotice } from '@/components/admin/AdminNotice';
+import { AdminShell } from '@/components/admin/AdminShell';
+import { requireAdminSession } from '@/lib/admin-auth';
+import { isDatabaseConfigured } from '@/lib/db';
+import { formatBaht } from '@/lib/formatters';
+import { listServiceRequests, listTechnicianApplications } from '@/lib/repositories';
 
-const totalRevenue = mockPayments.filter((p) => p.status === 'paid').reduce((s, p) => s + p.amount, 0);
-const pendingJobs = mockJobs.filter((j) => j.status === 'pending').length;
-const completedJobs = mockJobs.filter((j) => j.status === 'completed').length;
+export const dynamic = 'force-dynamic';
 
-const stats = [
-  { label: 'Mock Bookings', value: mockJobs.length, icon: Briefcase, href: '/admin/jobs' },
-  { label: 'Mock Pending Jobs', value: pendingJobs, icon: TrendingUp, href: '/admin/jobs' },
-  { label: 'Mock Completed', value: completedJobs, icon: Briefcase, href: '/admin/jobs' },
-  { label: 'Mock Revenue', value: `฿${totalRevenue.toLocaleString()}`, icon: CreditCard, href: '/admin/payments' },
-];
+export default async function AdminPage() {
+  await requireAdminSession();
 
-export default function AdminPage() {
+  if (!isDatabaseConfigured()) {
+    return (
+      <AdminShell title="Dashboard" subtitle="Database setup is required before live operations can begin.">
+        <AdminNotice title="DATABASE_URL is not configured">
+          Add `DATABASE_URL` to the Hostinger/Dokploy environment, run `npm run db:migrate`, then reload this page.
+        </AdminNotice>
+      </AdminShell>
+    );
+  }
+
+  const [requests, applications] = await Promise.all([
+    listServiceRequests(200),
+    listTechnicianApplications(100),
+  ]);
+
+  const openRequests = requests.filter((request) => !['completed', 'cancelled'].includes(request.status)).length;
+  const awaitingPayment = requests.filter((request) => request.paymentStatus === 'pending_promptpay').length;
+  const paidTotal = requests
+    .filter((request) => ['paid_promptpay', 'paid_cash'].includes(request.paymentStatus))
+    .reduce((total, request) => total + (request.quoteAmountBaht || 0), 0);
+  const newApplications = applications.filter((application) => application.status === 'new').length;
+
+  const cards = [
+    { label: 'Open Requests', value: openRequests, href: '/admin/requests' },
+    { label: 'Awaiting PromptPay', value: awaitingPayment, href: '/admin/requests' },
+    { label: 'Collected', value: formatBaht(paidTotal), href: '/admin/requests' },
+    { label: 'New Technicians', value: newApplications, href: '/admin/technicians' },
+  ];
+
   return (
-    <main className="min-h-screen bg-cream">
-      <div className="bg-charcoal px-8 py-6 border-b border-white/10">
-        <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <div>
-            <h1 className="font-display text-2xl font-semibold text-white">
-              One<span className="text-gold">Handy</span> Admin
-            </h1>
-            <p className="text-white/40 text-xs mt-1">Phase 1 mock dashboard overview</p>
-          </div>
-          <nav className="flex gap-6 text-sm text-white/50">
-            <Link href="/admin/jobs" className="hover:text-white transition-colors">Jobs</Link>
-            <Link href="/admin/technicians" className="hover:text-white transition-colors">Technicians</Link>
-            <Link href="/admin/payments" className="hover:text-white transition-colors">Payments</Link>
-            <Link href="/" className="hover:text-white transition-colors text-white/30">← Site</Link>
-          </nav>
-        </div>
+    <AdminShell
+      title="Dashboard"
+      subtitle="A focused control surface for triage, quotes, PromptPay/cash tracking, technician review, and automation health."
+    >
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {cards.map((card) => (
+          <Link
+            key={card.label}
+            href={card.href}
+            className="rounded-lg border border-border-line bg-surface p-5 transition-colors hover:border-gold"
+          >
+            <p className="text-xs font-semibold uppercase tracking-wide text-muted">{card.label}</p>
+            <p className="mt-3 text-3xl font-semibold text-ink">{card.value}</p>
+          </Link>
+        ))}
       </div>
 
-      <div className="max-w-6xl mx-auto px-8 py-12">
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-12">
-          {stats.map((stat) => {
-            const Icon = stat.icon;
-            return (
-              <Link
-                key={stat.label}
-                href={stat.href}
-                className="bg-surface border border-border-line rounded-lg p-5 hover:border-gold transition-colors group"
-              >
-                <div className="flex items-center justify-between mb-3">
-                  <p className="text-xs font-semibold tracking-wide uppercase text-muted">{stat.label}</p>
-                  <Icon size={14} className="text-muted group-hover:text-gold transition-colors" />
-                </div>
-                <p className="text-2xl font-semibold text-ink">{stat.value}</p>
-              </Link>
-            );
-          })}
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {[
-            { title: 'Manage Jobs', desc: 'View and assign sample bookings', href: '/admin/jobs', icon: Briefcase },
-            { title: 'Technicians', desc: 'Manage the sample technician roster', href: '/admin/technicians', icon: Users },
-            { title: 'Payments', desc: 'Track mock revenue and payouts', href: '/admin/payments', icon: CreditCard },
-          ].map((item) => {
-            const Icon = item.icon;
-            return (
-              <Link
-                key={item.title}
-                href={item.href}
-                className="flex items-center gap-4 p-5 bg-surface border border-border-line rounded-lg hover:border-gold transition-colors group"
-              >
-                <div className="w-10 h-10 rounded-sm bg-cream border border-border-line flex items-center justify-center">
-                  <Icon size={18} className="text-muted group-hover:text-gold transition-colors" />
-                </div>
-                <div>
-                  <p className="text-sm font-semibold text-ink">{item.title}</p>
-                  <p className="text-xs text-muted">{item.desc}</p>
-                </div>
-              </Link>
-            );
-          })}
-        </div>
+      <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3">
+        {[
+          { title: 'Request queue', desc: 'Review new jobs, set status, quote amount, technician, and payment state.', href: '/admin/requests' },
+          { title: 'Technician screening', desc: 'Review new partner applications and track vetting notes.', href: '/admin/technicians' },
+          { title: 'Automation health', desc: 'Check n8n delivery logs and retry failed events.', href: '/admin/settings' },
+        ].map((item) => (
+          <Link
+            key={item.title}
+            href={item.href}
+            className="rounded-lg border border-border-line bg-surface p-6 transition-colors hover:border-gold"
+          >
+            <p className="text-sm font-semibold text-ink">{item.title}</p>
+            <p className="mt-2 text-sm leading-6 text-muted">{item.desc}</p>
+          </Link>
+        ))}
       </div>
-    </main>
+    </AdminShell>
   );
 }
