@@ -1,0 +1,57 @@
+{
+  "id": "onehandy-events-intake",
+  "name": "OneHandy Events Intake",
+  "active": true,
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "onehandy-events",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "c8a9b347-d2a6-4b8d-8b77-2ef9ec785401",
+      "name": "OneHandy Events Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "webhookId": "onehandy-events"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { ok: true, eventType: $json.body.eventType || 'unknown', objectId: $json.body.objectId || 'unknown', receivedAt: new Date().toISOString() } }}",
+        "options": {}
+      },
+      "id": "453c471e-5da8-4fe8-9d5b-01f2a4c74522",
+      "name": "Respond OK",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        320,
+        0
+      ]
+    }
+  ],
+  "connections": {
+    "OneHandy Events Webhook": {
+      "main": [
+        [
+          {
+            "node": "Respond OK",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {},
+  "staticData": null
+}

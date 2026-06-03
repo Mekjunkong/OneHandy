@@ -49,7 +49,7 @@ const steps = [
   },
 ];
 
-const guarantees = [
+const serviceStandards = [
   { icon: Clock, title: 'Clear Follow-Up', desc: 'Availability and timing are confirmed before a service proceeds' },
   { icon: ShieldCheck, title: 'Pilot Technician Network', desc: 'Careful technician onboarding is in progress for Chiang Mai' },
   { icon: Phone, title: 'English Support', desc: 'Request coordination is handled in English throughout' },
@@ -113,14 +113,14 @@ export default function HowItWorksPage() {
           </div>
         </section>
 
-        {/* Guarantees */}
+        {/* Service standards */}
         <section className="py-20 px-6 bg-surface border-t border-border-line">
           <div className="max-w-3xl mx-auto">
             <h2 className="font-display text-2xl font-semibold text-ink mb-10 text-center">
-              Our guarantees
+              Service standards
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {guarantees.map((g) => {
+              {serviceStandards.map((g) => {
                 const Icon = g.icon;
                 return (
                   <div key={g.title} className="flex gap-4">

@@ -8,11 +8,13 @@ import { isDateTimeStepValid, isPropertyStepValid, isServiceStepValid, type Book
 
 interface StepPaymentProps {
   draft: BookingData;
+  error: string;
+  isSubmitting: boolean;
   onBack: () => void;
-  onSubmit: () => void;
+  onSubmit: () => Promise<void>;
 }
 
-export function StepPayment({ draft, onBack, onSubmit }: StepPaymentProps) {
+export function StepPayment({ draft, error, isSubmitting, onBack, onSubmit }: StepPaymentProps) {
   const [showTooltip, setShowTooltip] = useState(false);
 
   const service = services.find((s) => s.slug === draft.service);
@@ -100,13 +102,25 @@ export function StepPayment({ draft, onBack, onSubmit }: StepPaymentProps) {
         </div>
       </div>
 
-      <Button variant="outline" size="lg" className="w-full mb-6" disabled={!canSubmit} onClick={onSubmit}>
-        Submit Service Request
+      <Button
+        variant="outline"
+        size="lg"
+        className="w-full mb-6"
+        disabled={!canSubmit || isSubmitting}
+        onClick={onSubmit}
+      >
+        {isSubmitting ? 'Submitting request...' : 'Submit Service Request'}
       </Button>
 
       {!canSubmit && (
         <p className="text-xs text-error text-center mb-4">
           Please complete the required service, property, date, and contact details before submitting.
+        </p>
+      )}
+
+      {error && (
+        <p className="text-xs text-error text-center mb-4">
+          {error}
         </p>
       )}
 
