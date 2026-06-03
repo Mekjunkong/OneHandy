@@ -68,6 +68,7 @@ ONEHANDY_HERMES_WEBHOOK_SECRET=...
 ONEHANDY_SITE_URL=https://onehandy-v1.srv1691893.hstgr.cloud
 ONEHANDY_PUBLIC_WHATSAPP_NUMBER=66929894495
 NODE_FUNCTION_ALLOW_BUILTIN=crypto
+N8N_BLOCK_ENV_ACCESS_IN_NODE=false
 ```
 
 The Hermes webhook may listen on `8644`, but it must be blocked from public internet access with UFW and called privately from n8n through the Docker host gateway.
