@@ -10,8 +10,8 @@ Because there is only one WhatsApp number, the system does not use WhatsApp Clou
 2. The Next.js API stores the request in Postgres.
 3. The app creates an `n8n_event_logs` row and POSTs the signed payload to n8n.
 4. n8n rejects invalid `X-OneHandy-Signature` requests with `401`.
-5. For `service_request.created`, n8n calls the private Hermes webhook.
-6. Hermes drafts the response and sends the owner Telegram alert to the configured `telegram:Mike Fishken (dm)` target.
+5. For `service_request.created`, n8n calls the private OneHandy Hermes alert bridge on the VPS.
+6. The bridge runs Hermes draft generation in the background and sends the owner Telegram alert to the configured `telegram:Mike Fishken (dm)` target.
 7. The owner opens the prefilled `wa.me` link, reviews the draft, and manually sends the customer message.
 
 ## Private Services

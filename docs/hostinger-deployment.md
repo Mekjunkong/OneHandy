@@ -63,7 +63,7 @@ Set these n8n container variables without committing real secrets:
 
 ```bash
 ONEHANDY_N8N_WEBHOOK_SECRET=same-value-as-N8N_WEBHOOK_SECRET
-ONEHANDY_HERMES_WEBHOOK_URL=http://172.16.2.1:8644/webhooks/onehandy-draft
+ONEHANDY_HERMES_WEBHOOK_URL=http://172.16.2.1:8645/onehandy-alert
 ONEHANDY_HERMES_WEBHOOK_SECRET=...
 ONEHANDY_SITE_URL=https://onehandy-v1.srv1691893.hstgr.cloud
 ONEHANDY_PUBLIC_WHATSAPP_NUMBER=66929894495
@@ -71,7 +71,7 @@ NODE_FUNCTION_ALLOW_BUILTIN=crypto,http,https,url
 N8N_BLOCK_ENV_ACCESS_IN_NODE=false
 ```
 
-The Hermes webhook may listen on `8644`, but it must be blocked from public internet access with UFW and called privately from n8n through the Docker host gateway.
+The OneHandy Hermes alert bridge may listen on `8645` bound to the Docker host gateway, but it must be blocked from public internet access with UFW and called privately from n8n through the Docker host gateway. The generic Hermes webhook can remain on `8644` for other private webhook routes.
 
 ## Security Notes
 
